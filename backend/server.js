@@ -15,17 +15,23 @@ const pool = new Pool({
 
 
 app.get("/users", async (req, res) => {
-    const fromDate = new Date();
+    try {
+        const fromDate = new Date();
+        //return all rows
+        const results = await pool.query("select id, username, email from users")
+        console.table(results.rows)
+        console.log(new Date())
+        const toDate = new Date();
+        const elapsed = toDate.getTime() - fromDate.getTime();
 
-    //return all rows
-    const results = await pool.query("select username, email from users")
-    console.table(results.rows)
-    console.log(new Date())
-    const toDate = new Date();
-    const elapsed = toDate.getTime() - fromDate.getTime();
+        //send it to the wire
+        res.send({ "rows": results.rows, "elapsed": elapsed, "method": "pool" })
+    }
+    catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
 
-    //send it to the wire
-    res.send({ "rows": results.rows, "elapsed": elapsed, "method": "pool" })
 })
 
 app.listen(2015, () => console.log("Listening on port 2015"))
