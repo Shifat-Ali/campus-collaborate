@@ -1,31 +1,28 @@
-const app = require("express")();
-const { Pool } = require('pg');
-require('dotenv').config();
+const express = require("express");
+const app = express();
+const pool = require("./db/pool")
+const user = require('./routes/users')
 
-const pool = new Pool({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    max: 20,
-    connectionTimeoutMillis: 3000,
-    idleTimeoutMillis: 30000,
-});
-
+app.use(express.json());
+app.use('/user',user);
 
 app.get("/users", async (req, res) => {
-    const fromDate = new Date();
+    try {
+        const fromDate = new Date();
+        //return all rows
+        const results = await pool.query("select * from backend.users")  //select id, username, email from users
+        console.table(results.rows)
+        console.log(new Date())
+        const toDate = new Date();
+        const elapsed = toDate.getTime() - fromDate.getTime();
 
-    //return all rows
-    const results = await pool.query("select username, email from users")
-    console.table(results.rows)
-    console.log(new Date())
-    const toDate = new Date();
-    const elapsed = toDate.getTime() - fromDate.getTime();
-
-    //send it to the wire
-    res.send({ "rows": results.rows, "elapsed": elapsed, "method": "pool" })
+        //send it to the wire
+        res.send({ "rows": results.rows, "elapsed": elapsed, "method": "pool" })
+    }
+    catch (error) {
+        console.log(error.message);
+        res.sendStatus(500);
+    }
 })
 
 app.listen(2015, () => console.log("Listening on port 2015"))

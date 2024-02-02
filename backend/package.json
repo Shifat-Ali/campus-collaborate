@@ -10,10 +10,7 @@
   "author": "shifat",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
-=======
     "dotenv": "^16.4.1",
->>>>>>> upstream/main
     "express": "^4.18.2",
     "pg": "^8.11.3"
   }
