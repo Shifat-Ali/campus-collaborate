@@ -5,17 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c9f204c-91e6-4d4c-8183-a823f5effd95" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/controller/courseController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/controller/experienceController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/controller/followController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/controller/projectController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/controller/queryController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/controller/tagsController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/controller/userController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/controller/votesController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/request.rest" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/controller/certificateController.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controller/certificateController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/user/certificates.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/user/certificates.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/user/courses.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/user/courses.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/user/experiences.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/user/experiences.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/user/projects.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/user/projects.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controller/fhs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/queries.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/queries.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Pages/Login.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,13 +55,13 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2023.2.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "ts.external.directory.path": "E:\\campus-collaborate\\frontend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -81,7 +86,7 @@
       <option name="presentableId" value="Default" />
       <updated>1706812219939</updated>
       <workItem from="1706812223737" duration="5379000" />
-      <workItem from="1706866763247" duration="41919000" />
+      <workItem from="1706866763247" duration="42561000" />
     </task>
     <servers />
   </component>

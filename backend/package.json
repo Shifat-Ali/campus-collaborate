@@ -5,13 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "nodemon server.js"
   },
   "author": "shifat",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
+    "faker": "^6.6.6",
     "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.0",
+    "nodemon": "^3.0.3"
   }
 }
