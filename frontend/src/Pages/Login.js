@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import MicrosoftLogin from "react-microsoft-login";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const [error, setError] = useState(null);
 
   const authHandler = async (error, authData) => {
     if (!error) {
+      console.log( jwtDecode(authData.accessToken))
       try {
         const response = await axios.post("http://localhost:3000", {
           accessToken: authData.accessToken,
         });
         console.log(authData.accessToken);
 
-        console.log("Authentication successful:", response.data);
+        // console.log("Authentication successful:", response.data);
         // Handle successful authentication, e.g., store user data in state or Redux
       } catch (error) {
         console.error("Error during authentication:", error);
