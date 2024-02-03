@@ -6,7 +6,7 @@ const cert = require('../../controller/certificateController')
 
 router.get('/',cert.getCertificates)
 router.post('/',auth,cert.addCertificate)
-// router.put('/',auth,cert.editCertificate)
+router.put('/',auth,cert.editCertificate)
 router.delete('/',auth,cert.deleteCertificate)
 
 module.exports = router
