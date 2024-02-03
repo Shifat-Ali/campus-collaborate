@@ -1,4 +1,8 @@
-const pool = require('../db/pool')
+const { query } = require('express');
+const pool = require('../db/pool');
+const { getTagsByQueryId } = require('./tagsController');
+const { getVotesByQueryId } = require('./votesController');
+
 
 async function getAllQueries(req, res) {
     const page = parseInt(req.query.page);
@@ -11,7 +15,7 @@ async function getAllQueries(req, res) {
         const startIndex = (page - 1) * limit;
         const endIndex = page * limit;
         let results = await pool.query("SELECT COUNT(id) FROM backend.queries");
-        const count = JSON.parse(JSON.stringify(results.rows))[0].count;
+        const count = results.rows[0].count;
         if (page > 1) {
             response.previous = {
                 page: page - 1,
@@ -33,7 +37,17 @@ async function getAllQueries(req, res) {
                 OFFSET ${startIndex} LIMIT ${limit};
             `
         results = await pool.query(sql)
-        response.rows = results.rows;
+
+        for (let query of results.rows) {
+            query.body = query.body.slice(0, 200) + '...';
+            query.tags = await getTagsByQueryId(query.id);
+
+            votes = await getVotesByQueryId(query.id);
+            query.upvotes = votes.upvotes;
+            query.downvotes = votes.downvotes;
+        }
+
+        response.queries = results.rows;
         res.status(200).json(response);
     }
     catch (err) {
