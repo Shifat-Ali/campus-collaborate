@@ -10,10 +10,9 @@ const Login = () => {
     if (!error) {
       console.log( jwtDecode(authData.accessToken))
       try {
-        const response = await axios.post("http://localhost:3000", {
-          accessToken: authData.accessToken,
-        });
-        console.log(authData.accessToken);
+        // const response = await axios.post("http://localhost:3000", {
+        //   accessToken: authData.accessToken,
+        // });
 
         // console.log("Authentication successful:", response.data);
         // Handle successful authentication, e.g., store user data in state or Redux
