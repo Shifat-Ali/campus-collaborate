@@ -5,6 +5,15 @@ const Theme = createTheme({
     fontFamily: ['"Segoe UI"', "sans-serif"].join(","),
   },
   components: {
+    MuiTabs: {
+      styleOverrides: {
+        root: {
+          "&.MuiTabs-indicator": {
+            width: 0,
+          },
+        },
+      },
+    },
     MuiTab: {
       styleOverrides: {
         root: {
@@ -12,19 +21,23 @@ const Theme = createTheme({
           "&:hover": {
             borderBottom: "2px solid black",
           },
+          "&.Mui-selected": {
+            backgroundColor: "#1976d2",
+            color: "white",
+          },
         },
       },
     },
     MuiTextField: {
       styleOverrides: {
         root: {
-          width: "600px",
+          width: "87%",
           padding: "10px",
 
           "& .MuiInputBase-root": {
-            height: 70,
-            borderRadius: "100px",
+            borderRadius: "10px",
           },
+          "& .MuiInputLabel-root": {},
         },
       },
     },
@@ -44,6 +57,30 @@ const Theme = createTheme({
           backgroundColor: "red",
           cursor: "pointer",
           // display: "none",
+        },
+      },
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            backgroundColor: "#0084bd",
+            padding: 10,
+            borderRadius: "20px",
+            color: "white",
+            ".MuiListItemIcon-root": {
+              color: "white",
+            },
+          },
+        },
+      },
+    },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          "&.boxcon": {
+            padding: 0,
+          },
         },
       },
     },
