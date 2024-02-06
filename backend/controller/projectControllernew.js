@@ -12,8 +12,8 @@ async function getAllProject(req, res) {
             rows: result.rows,
             elapsed: toDate.getTime() - fromDate.getTime(),
             method: 'pool'
-        }
-        res.status(200).json(response)
+        };
+        res.status(200).json(response);
     } catch (err) {
         console.error(err.message);
         res.status(500).send(err.message);
@@ -21,71 +21,59 @@ async function getAllProject(req, res) {
 }
 
 async function getProjectById(req, res) {
-
     try {
-        user_id = req.query.user_id;
-        const fromDate = new Date()
-        const result = await pool.query("SELECT * FROM backend.projects WHERE owner_id = user_id")
+        const user_id = req.query.user_id;
+        const fromDate = new Date();
+        const result = await pool.query("SELECT * FROM backend.projects WHERE owner_id = user_id");
 
         console.log(result.row);
-        const toDate = new Date()
+        const toDate = new Date();
 
         const response = {
             rows: result.rows,
             elapsed: toDate.getTime() - fromDate.getTime(),
             method: 'pool'
-        }
-        res.status(200).json(response)
-    }
-    catch (err) {
+        };
+        res.status(200).json(response);
+    } catch (err) {
         console.error(err.message);
-        res.status(500).send(err.message)
+        res.status(500).send(err.message);
     }
 }
 
 async function voteProjectById(req, res) {
     try {
-        sql = `
-        SELECT
-            COUNT(CASE WHEN vote = 'up' THEN 1 END) AS upvotes,
-            COUNT(CASE WHEN vote = 'down' THEN 1 END) AS downvotes
-        FROM backend."projectvotes"
-        WHERE query_id = 512;
-    `
-        results = await (pool.query(sql));
+        const sql = `
+            SELECT
+                COUNT(CASE WHEN vote = 'up' THEN 1 END) AS upvotes,
+                COUNT(CASE WHEN vote = 'down' THEN 1 END) AS downvotes
+            FROM backend."projectvotes"
+            WHERE query_id = 512;
+        `;
+        const results = await pool.query(sql);
         return results.rows[0];
-    }
-    catch (err) {
+    } catch (err) {
         throw err;
     }
 }
 
-
-
-
 // Define a schema using Zod
-
-
 const projectSchema = z.object({
     owner_id: z.number(),
-    project_name: z.string().max(50), // Assuming varchar(50)
-    tagline: z.string().max(150), // Assuming varchar(150)
+    project_name: z.string().max(50),
+    tagline: z.string().max(150),
     votes: z.number().optional(),
-    url: z.string().url().max(500), // Assuming varchar(500)
-    thumbnail: z.string(), // Assuming blob (base64-encoded string)
-    description: z.string().max(5000), // Assuming varchar(5000)
-    multimedia: z.string().optional(), // Assuming blob (base64-encoded string)
+    url: z.string().url().max(500),
+    thumbnail: z.string(),
+    description: z.string().max(5000),
+    multimedia: z.string().optional()
 });
-
-
-
 
 async function insertProject(req, res) {
     let projectData = req.body;
     console.log(projectData);
 
     try {
-
         const validatedData = projectSchema.parse(projectData);
 
         const result = await pool.query(
@@ -98,7 +86,7 @@ async function insertProject(req, res) {
                 validatedData.url || null,
                 validatedData.thumbnail,
                 validatedData.description,
-                validatedData.multimedia || null,
+                validatedData.multimedia || null
             ]
         );
 
@@ -106,57 +94,39 @@ async function insertProject(req, res) {
         res.status(201).json(result.rows[0]);
     } catch (error) {
         console.error('Validation failed or database error:', error);
-
-
         res.status(400).json({ error: 'Invalid input' });
     }
 }
 
 async function getCollaboraterByProjectId(req, res) {
     try {
-        projectId = req.query.project_id
-        sql = `SELECT *
-        FROM backend.collaborators
-        JOIN project ON project.id =collaborators.project_id
-        JOIN user ON user.id = collaborators.collaborators_id
-        WHERE project_id =$1`
-        const result = await pool.query(sql, [projectid])
+        const projectId = req.query.project_id;
+        const sql = `SELECT *
+                     FROM backend.collaborators
+                     JOIN project ON project.id =collaborators.project_id
+                     JOIN user ON user.id = collaborators.collaborators_id
+                     WHERE project_id =$1`;
+        const result = await pool.query(sql, [projectId]);
         if (result.rows.length === 0) {
-            res.status(200).json({ message: 'This project has no collaborators' })
+            res.status(200).json({ message: 'This project has no collaborators' });
+        } else {
+            return result.rows;
         }
-        else {
-            return result.rows
-        }
-    }
-
-    catch (error) {
+    } catch (error) {
         console.error('Validation failed or database error:', error);
     }
-
-
 }
-
 
 async function getCommentById(req, res) {
-    projectid = req.query.projec_id
-
+    const projectId = req.query.projec_id;
+    // Implement your logic here
 }
-
-
-
-
-
-
-
-
-
-
 
 module.exports = {
     getAllProject,
     getProjectById,
     voteProjectById,
     insertProject,
-    getCollaboraterByProjectId
-
+    getCollaboraterByProjectId,
+    getCommentById
 };
