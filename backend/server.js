@@ -2,10 +2,11 @@ const express = require("express");
 const app = express();
 const pool = require("./db/pool")
 const user = require('./routes/users')
+const project = require('./routes/projects')
 
 app.use(express.json());
 app.use('/user',user);
-
+app.use('/projects',project);
 app.get("/users", async (req, res) => {
     try {
         const fromDate = new Date();

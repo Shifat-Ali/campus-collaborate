@@ -8,8 +8,16 @@ const pool = new Pool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     max: 20,
-    connectionTimeoutMillis: 3000,
+    connectionTimeoutMillis: 100000,
     idleTimeoutMillis: 30000,
+});
+pool.on('connect', () => {
+    console.log('Connected to the database');
+});
+
+// Handle pool errors
+pool.on('error', (err) => {
+    console.error('Database pool error:', err);
 });
 
 // const pool = new Pool({
