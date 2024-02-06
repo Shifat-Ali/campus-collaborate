@@ -9,6 +9,7 @@ router.get ('/',getAllProject);
 router.get('/:id',getProjectById )
 router.post('/:id/vote',voteProjectById)
 router.post('/createproj',insertProject)
-router.post('/:id/feedback',)
+router.post('/:id/feedback')
+router.get('/:id/votes')
 
 module.exports=router;
