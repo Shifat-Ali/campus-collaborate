@@ -1,5 +1,5 @@
-//GET http://localhost:2015/users?page=1&limit=5
+GET http://localhost:2015/users?page=1&limit=5
 
 
 
-GET http://localhost:2015/queries?page=2&limit=5
+GET http://localhost:2015/queries?page=1&limit=20

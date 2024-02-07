@@ -1,3 +1,4 @@
+const { getCommentCountByQueryId } = require('../db/commentController');
 const pool = require('../db/pool');
 const { getTagsByQueryId } = require('../db/tagsController');
 const { getVotesByQueryId } = require('../db/votesController');
@@ -28,8 +29,10 @@ async function getAllQueries(req, res) {
             }
         }
 
-        sql = ` SELECT id, title, body, user_id, created_at
-                FROM backend.queries
+        sql = ` SELECT t1.id as id, title, body, created_at, user_id, username, profile_photo
+                FROM backend.queries as t1
+                INNER JOIN backend.users as t2
+                ON t1.user_id = t2.id
                 ORDER BY created_at DESC
                 OFFSET ${startIndex} LIMIT ${limit};
             `
@@ -38,7 +41,7 @@ async function getAllQueries(req, res) {
         for (let query of results.rows) {
             query.body = query.body.slice(0, 200) + '...';
             query.tags = await getTagsByQueryId(query.id);
-
+            query.numOfComments = await getCommentCountByQueryId(query.id);
             votes = await getVotesByQueryId(query.id);
             query.upvotes = votes.upvotes;
             query.downvotes = votes.downvotes;
@@ -51,6 +54,10 @@ async function getAllQueries(req, res) {
         console.log(err.message);
         res.status(500).send(err.message);
     }
+}
+
+async function getQueryById(query_id) {
+
 }
 
 module.exports = {

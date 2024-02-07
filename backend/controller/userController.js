@@ -26,7 +26,7 @@ async function getAllUsers(req, res) {
                 limit: limit,
             }
         }
-        sql = ` SELECT id, username, firstname, lastname, email, contact_no, about
+        sql = ` SELECT id, username, firstname, lastname, email, contact_no, about, roll_number, profile_photo
                 FROM backend.users
                 ORDER BY id DESC
                 OFFSET ${startIndex} LIMIT ${limit};
