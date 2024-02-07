@@ -1,4 +1,4 @@
-const pool = require('../db/pool')
+const pool = require('./pool')
 
 async function getVotesByQueryId(query_id) {
     try {

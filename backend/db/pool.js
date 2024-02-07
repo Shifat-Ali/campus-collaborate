@@ -12,6 +12,23 @@ const pool = new Pool({
     idleTimeoutMillis: 30000,
 });
 
+// Graceful shutdown when receiving SIGTERM or SIGINT signals
+process.on('SIGTERM', () => {
+    console.log('Received SIGTERM signal. Closing pool...');
+    pool.end(() => {
+        console.log('Connection pool has been closed.');
+        process.exit(0);
+    });
+});
+
+process.on('SIGINT', () => {
+    console.log('Received SIGINT signal. Closing pool...');
+    pool.end(() => {
+        console.log('Connection pool has been closed.');
+        process.exit(0);
+    });
+});
+
 // const pool = new Pool({
 //     host:process.env.PGHOST,
 //     port:process.env.DB_PORT,

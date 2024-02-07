@@ -1,7 +1,6 @@
-const { query } = require('express');
 const pool = require('../db/pool');
-const { getTagsByQueryId } = require('./tagsController');
-const { getVotesByQueryId } = require('./votesController');
+const { getTagsByQueryId } = require('../db/tagsController');
+const { getVotesByQueryId } = require('../db/votesController');
 
 
 async function getAllQueries(req, res) {
@@ -28,8 +27,6 @@ async function getAllQueries(req, res) {
                 limit: limit,
             }
         }
-
-        let queryObj = {};
 
         sql = ` SELECT id, title, body, user_id, created_at
                 FROM backend.queries

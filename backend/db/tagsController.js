@@ -1,4 +1,4 @@
-const pool = require('../db/pool')
+const pool = require('./pool')
 
 async function getTagsByQueryId(query_id) {
     try {
