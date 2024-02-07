@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const pool = require("./db/pool")
-<<<<<<< HEAD
 const user = require('./routes/users')
 const project = require('./routes/projects')
 
@@ -26,7 +25,6 @@ app.get("/users", async (req, res) => {
         res.sendStatus(500);
     }
 })
-=======
 const user = require('./routes/users');
 const query = require('./routes/queries')
 const { getAllUsers } = require("./controller/userController");
@@ -35,6 +33,5 @@ app.use(express.json());
 app.get('/users', getAllUsers);
 app.use('/user', user);
 app.use('/queries', query);
->>>>>>> bfcc9940e5b9cc8d7983e2847638b51b0abf3df9
 
 app.listen(2015, () => console.log("Listening on port 2015"))
