@@ -8,7 +8,6 @@ const course = require('./user/courses')
 const fol = require("../controller/followController");
 
 
-
 router.use('/certificates',certs);
 router.use('/experience',exp);
 router.use('/projects',project);

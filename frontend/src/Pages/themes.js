@@ -18,6 +18,7 @@ const Theme = createTheme({
       styleOverrides: {
         root: {
           fontWeight: "800",
+
           "&:hover": {
             borderBottom: "2px solid black",
           },
