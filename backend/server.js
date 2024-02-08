@@ -25,7 +25,7 @@ app.get("/users", async (req, res) => {
         res.sendStatus(500);
     }
 })
-const user = require('./routes/users');
+
 const query = require('./routes/queries')
 const { getAllUsers } = require("./controller/userController");
 
