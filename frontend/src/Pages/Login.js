@@ -5,27 +5,18 @@ import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const [error, setError] = useState(null);
-
   const authHandler = async (error, authData) => {
     if (!error) {
-      console.log( jwtDecode(authData.accessToken))
-      try {
-        // const response = await axios.post("http://localhost:3000", {
-        //   accessToken: authData.accessToken,
-        // });
-
-        // console.log("Authentication successful:", response.data);
-        // Handle successful authentication, e.g., store user data in state or Redux
-      } catch (error) {
-        console.error("Error during authentication:", error);
-        setError("Error during authentication. Please try again.");
-      }
+      const data = jwtDecode(authData.accessToken);
+      const username = data.name;
+      const email = data.upn;
+      const rollNumber=data.family_name;
+      const response=await axios.post()
     } else {
-      console.error("Microsoft authentication error:", error);
-      setError("Microsoft authentication error. Please try again.");
+      console.log("Error while authentication", error);
+      setError(error);
     }
   };
-
   return (
     <div>
       <h1>Login with Microsoft</h1>

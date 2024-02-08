@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "react-quill/dist/quill.snow.css";
-import { styled, alpha } from "@mui/material/styles";
+import { styled, alpha, ThemeProvider } from "@mui/material/styles";
 import { AppBar, Toolbar, InputBase, Divider, Typography } from "@mui/material";
-import Theme from "./themes";
+import Theme from "../themes";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Search = styled("div")(({ theme }) => ({
@@ -48,51 +48,53 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function UpBar() {
   return (
-    <AppBar
-      sx={{
-        backgroundColor: "white",
-        position: "relative",
-        height: "80px",
-        display: "flex",
-        flexDirection: "row",
-        //   justifyContent: "flex-end",
-      }}
-    >
-      <Toolbar
+    <ThemeProvider theme={Theme}>
+      <AppBar
         sx={{
-          flexGrow: 1,
+          backgroundColor: "white",
+          position: "relative",
+          height: "80px",
           display: "flex",
           flexDirection: "row",
-          alignContent: "center",
+          //   justifyContent: "flex-end",
         }}
       >
-        <Typography
-          variant="h6"
-          noWrap
-          component="div"
+        <Toolbar
           sx={{
-            color: "black",
-            display: { xs: "none", sm: "block", flexGrow: 1 },
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: "row",
+            alignContent: "center",
           }}
         >
-          Create a Post
-        </Typography>
-        <Divider
-          orientation="vertical"
-          flexItem
-          variant="middle"
-          sx={{ flexGrow: 1 }}
-        />
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon sx={{ color: "black" }} />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ "aria-label": "search" }}
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{
+              color: "black",
+              display: { xs: "none", sm: "block", flexGrow: 1 },
+            }}
+          >
+            Create a Post
+          </Typography>
+          <Divider
+            orientation="vertical"
+            flexItem
+            variant="middle"
+            sx={{ flexGrow: 1 }}
           />
-        </Search>
-      </Toolbar>
-    </AppBar>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon sx={{ color: "black" }} />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+        </Toolbar>
+      </AppBar>
+    </ThemeProvider>
   );
 }

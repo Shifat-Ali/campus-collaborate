@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
 import {
   Divider,
@@ -12,14 +12,26 @@ import {
   InputAdornment,
   Link,
   Button,
+  Chip,
 } from "@mui/material";
-import LinkIcon from "@mui/icons-material/Link";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import Tags from "../Tags";
 
 const MyQuillEditor = () => {
   const [content, setContent] = useState("");
+  const [editorHeight, setEditorHeight] = useState("100px"); // Initial editor height
+
+  useEffect(() => {
+    // Measure the content's height
+    const editor = document.querySelector(".ql-container");
+    if (editor) {
+      const contentHeight = editor.clientHeight;
+      // Set the editor height based on content height
+      setEditorHeight(Math.max(contentHeight, 100) + "px"); // Minimum height of 100px
+    }
+  }, [content]);
 
   const handleChange = (value) => {
     setContent(value);
@@ -27,20 +39,29 @@ const MyQuillEditor = () => {
 
   const quillStyle = {
     width: "80%",
-    height: "200px",
+    minHeight: "200px", // Minimum height for the editor
+    height: editorHeight, // Dynamic height based on content
     borderRadius: "10px",
     margin: "auto",
-    // border: "1px solid blue",
+    // border: "1px solid #ccc", // Add a border to make the boundary visible
+    // overflowY: "auto", // Enable vertical scrolling if content overflows
   };
 
   return (
-    <ReactQuill style={quillStyle} value={content} onChange={handleChange} />
+    <ReactQuill
+      style={quillStyle}
+      value={content}
+      onChange={handleChange}
+      placeholder="Details...."
+    />
   );
 };
 
-export default function NewProj() {
-  const handleIconClick = () => {
-    alert("Clicked");
+export default function NewPost() {
+  const [selectedTags, setSelectedTags] = useState([]);
+
+  const handleTagAdd = (tag) => {
+    setSelectedTags([...selectedTags, tag]);
   };
   return (
     <Paper>
@@ -50,6 +71,7 @@ export default function NewProj() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "30px",
+          flexWrap: "wrap",
         }}
       >
         <Container
@@ -58,6 +80,7 @@ export default function NewProj() {
             flexDirection: "row",
             justifyContent: "center",
             marginTop: "20px",
+            marginBottom: "20px",
           }}
         >
           <TextField
@@ -88,63 +111,31 @@ export default function NewProj() {
             disabled
           />
         </Container>
-        <Container
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            marginTop: "20px",
-          }}
-        >
-          <TextField
-            autoComplete="off"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LinkIcon />
-                </InputAdornment>
-              ),
-            }}
-            label="Link to Project"
-            variant="outlined"
-          />
-        </Container>
-        <Container
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            marginTop: "20px",
-          }}
-        >
-          <TextField
-            autoComplete="off"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LinkIcon />
-                </InputAdornment>
-              ),
-            }}
-            label="Title"
-            variant="outlined"
-          />
-        </Container>
-        <Container
-          sx={{
-            border: "1px solid #b3b3b3",
-            padding: "10px",
-            marginTop: "10px",
-            borderRadius: "10px",
-            width: "80%",
-            marginBottom: "10px",
-          }}
-        >
-          <input type="file" />
-        </Container>
         <MyQuillEditor />
+        <Container
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            // justifyContent: "center",
+            marginTop: "40px",
+            // overflowX: "auto",
+            flexWrap: "wrap",
+          }}
+        >
+          <Tags onTagAdd={handleTagAdd} />
+        </Container>
+        <Button
+          sx={{
+            backgroundColor: "#1976d2",
+            marginTop: "10px",
+            color: "white",
+            width: "10%",
+            marginLeft: "auto",
+          }}
+        >
+          POST
+        </Button>
       </Box>
-      <Button>Hhe</Button>
     </Paper>
   );
 }
