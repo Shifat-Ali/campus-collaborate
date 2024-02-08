@@ -33,7 +33,7 @@ const saveUser = (username, email, rollNumber,callback) => {
     }
     // if email doesn't exist save, user in the backend.
     const insertQuery = `
-    INSERT INTO backend.users (username,firstname,lastname,email,contact_no,about)
+    INSERT INTO backend.users (username,firstname,lastname,email,contact_no,about,roll_number)
     VALUES ($1, $2, $3, $4,$5,$6,$7);
   `;
     const insertValues = [

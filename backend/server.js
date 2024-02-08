@@ -12,7 +12,7 @@ app.use(express.json());
 app.get('/users', getAllUsers);
 app.use('/user', user);
 app.use('/queries', query);
-app.use('/projects', project);
+// app.use('/projects', project);
 
 
 // for saving the currently logged in user
