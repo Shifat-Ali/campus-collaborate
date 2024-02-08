@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import { Divider, Tab, Tabs, Box, Typography, Container } from "@mui/material";
 
-import Theme from "./themes";
+import Theme from "../themes";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import { ThemeProvider } from "styled-components";
-import NewProj from "./NewProj";
+import NewProj from "./New/NewProj";
+import NewPost from "./New/newpost";
+import NewWork from "./New/NewWork";
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -20,13 +22,7 @@ function CustomTabPanel(props) {
       {...other}
     >
       {value === index &&
-        (index === 0 ? (
-          <Typography>Second</Typography>
-        ) : index === 1 ? (
-          <NewProj />
-        ) : (
-          <Typography>Third</Typography>
-        ))}
+        (index === 0 ? <NewPost /> : index === 1 ? <NewProj /> : <NewWork />)}
     </div>
   );
 }
@@ -78,15 +74,11 @@ export default function PostTabs() {
             />
           </Tabs>
         </Container>
-        <CustomTabPanel index={0} value={value}>
-          hehe
-        </CustomTabPanel>
-        <CustomTabPanel index={1} value={value}>
-          hehe23
-        </CustomTabPanel>
-        <CustomTabPanel index={2} value={value}>
-          hehe3
-        </CustomTabPanel>
+        <CustomTabPanel index={0} value={value} />
+
+        <CustomTabPanel index={1} value={value} />
+
+        <CustomTabPanel index={2} value={value} />
       </Box>
     </ThemeProvider>
   );

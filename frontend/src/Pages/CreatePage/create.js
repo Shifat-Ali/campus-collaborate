@@ -17,10 +17,11 @@ import {
   Tab,
   Tabs,
 } from "@mui/material";
-import Theme from "./themes";
+import Theme from "../themes";
 import UpBar from "./upBar";
 import SideBar from "./sideBar";
 import PostTabs from "./posttabs";
+import RightBar from "./RightBar";
 
 const CreatePost = () => {
   return (
@@ -37,11 +38,11 @@ const CreatePost = () => {
               <Typography variant="h4">Create a Post</Typography>
             </Container>
             <Grid container sx={{ mt: 5 }} spacing={2}>
-              <Grid item xs={8}>
+              <Grid item xs={9}>
                 <PostTabs />
               </Grid>
-              <Grid item xs={4}>
-                heh
+              <Grid item xs={3}>
+                <RightBar />
               </Grid>
             </Grid>
           </Box>
