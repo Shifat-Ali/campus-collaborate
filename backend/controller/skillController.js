@@ -1,7 +1,6 @@
 const pool = require('../db/pool')
 
 
-//get all skills of a user, id from req.body
 async function getSkills(req,res){
     const {user_id} = req.body;
     if(!user_id){
