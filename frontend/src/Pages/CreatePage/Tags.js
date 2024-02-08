@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Chip, Menu, MenuItem } from "@mui/material";
+import { Box, Button, Chip, Menu, MenuItem, TextField } from "@mui/material";
 
 const Tags = () => {
   const [selectedTags, setSelectedTags] = useState([]);
@@ -16,6 +16,7 @@ const Tags = () => {
     "Tag10",
     "Tag11",
   ]);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     // Sort the availableTags array alphabetically before setting it as the initial state
@@ -53,6 +54,14 @@ const Tags = () => {
     setAvailableTags((prevTags) => [...prevTags, tagToRemove].sort());
   };
 
+  const handleSearch = (event) => {
+    setSearchText(event.target.value.toLowerCase());
+  };
+
+  // Filter available tags based on search text
+  const filteredTags = availableTags.filter((tag) =>
+    tag.toLowerCase().includes(searchText)
+  );
   return (
     <Box
       sx={{
@@ -79,8 +88,23 @@ const Tags = () => {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleCloseMenu}
+        PaperProps={{
+          style: {
+            maxHeight: 200, // Set max height for menu
+            overflowY: "auto", // Enable vertical scrolling
+          },
+        }}
       >
-        {availableTags.map((tag) => (
+        <TextField
+          label="Search Tags"
+          variant="outlined"
+          size="small"
+          InputLabelProps={{ shrink: true }}
+          fullWidth
+          onChange={handleSearch}
+          sx={{ marginBottom: "10px" }}
+        />
+        {filteredTags.map((tag) => (
           <MenuItem key={tag} onClick={() => handleTagSelect(tag)}>
             {tag}
           </MenuItem>
