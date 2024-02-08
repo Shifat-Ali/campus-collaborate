@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Login from "./Login";
 import { styled, alpha } from "@mui/material/styles";
 import {
   ThemeProvider,
@@ -24,6 +24,7 @@ import PostTabs from "./posttabs";
 
 const CreatePost = () => {
   return (
+    <>
     <ThemeProvider theme={Theme}>
       <Grid container spacing={0}>
         <Grid item>
@@ -35,6 +36,7 @@ const CreatePost = () => {
           <Box>
             <Container sx={{ pt: 10 }}>
               <Typography variant="h4">Create a Post</Typography>
+              
             </Container>
             <Grid container sx={{ mt: 5 }} spacing={2}>
               <Grid item xs={8}>
@@ -42,12 +44,14 @@ const CreatePost = () => {
               </Grid>
               <Grid item xs={4}>
                 heh
+                <Login/>
               </Grid>
             </Grid>
           </Box>
         </Grid>
       </Grid>
     </ThemeProvider>
+    </>
   );
 };
 
