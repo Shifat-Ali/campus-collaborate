@@ -48,11 +48,20 @@ export default function PostTabs() {
         <Container
           sx={{
             borderBottom: "1px solid black",
+            display: "flex",
+            flexDirection: "row",
+            flexGrow: 1,
+
             // height: "40px",
           }}
           className="boxcon"
         >
-          <Tabs value={value} onChange={handleChange} variant="fullWidth">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="fullWidth"
+            sx={{ width: "100%" }}
+          >
             <Tab
               icon={<InsertDriveFileIcon />}
               iconPosition="start"
