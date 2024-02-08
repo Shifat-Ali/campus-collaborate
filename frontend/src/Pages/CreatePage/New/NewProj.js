@@ -21,15 +21,15 @@ import "react-quill/dist/quill.snow.css";
 import Tags from "../Tags";
 const MyQuillEditor = () => {
   const [content, setContent] = useState("");
-  const [minHeight, setMinHeight] = useState("100px"); // Initial minimum height
+  const [editorHeight, setEditorHeight] = useState("100px"); // Initial editor height
 
   useEffect(() => {
     // Measure the content's height
-    const editor = document.querySelector(".ql-editor");
+    const editor = document.querySelector(".ql-container");
     if (editor) {
       const contentHeight = editor.clientHeight;
-      // Update the minHeight based on the content's height
-      setMinHeight(Math.max(contentHeight, 0) + "px"); // Minimum height of 100px
+      // Set the editor height based on content height
+      setEditorHeight(Math.max(contentHeight, 100) + "px"); // Minimum height of 100px
     }
   }, [content]);
 
@@ -39,14 +39,20 @@ const MyQuillEditor = () => {
 
   const quillStyle = {
     width: "80%",
-    height: "auto",
-    minHeight: minHeight, // Set minHeight dynamically
+    minHeight: "200px", // Minimum height for the editor
+    height: editorHeight, // Dynamic height based on content
     borderRadius: "10px",
     margin: "auto",
+    // border: "1px solid #ccc", // Add a border to make the boundary visible
+    // overflowY: "auto", // Enable vertical scrolling if content overflows
   };
-
   return (
-    <ReactQuill style={quillStyle} value={content} onChange={handleChange} />
+    <ReactQuill
+      style={quillStyle}
+      value={content}
+      onChange={handleChange}
+      placeholder="Details..."
+    />
   );
 };
 
@@ -160,7 +166,7 @@ export default function NewProj() {
             display: "flex",
             flexDirection: "row",
             // justifyContent: "center",
-            marginTop: "20px",
+            marginTop: "40px",
             // overflowX: "auto",
             flexWrap: "wrap",
           }}
