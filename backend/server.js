@@ -9,10 +9,9 @@ const project = require('./routes/projects')
 
 
 const {saveUser} =require("./controller/saveUserController");
-const project=require("./routes/projects");
-const cors = require('cors');
+// const cors = require('cors');
 
-
+app.use(cors());
 app.use(express.json());
 app.get('/users', getAllUsers);
 app.use('/user', user);
@@ -36,5 +35,5 @@ app.post("/save_user",(req,res)=>{
     })
 });
 
-// app.use(cors);
+
 app.listen(2015, () => console.log("Listening on port 2015"));
