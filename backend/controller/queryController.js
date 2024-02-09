@@ -1,4 +1,4 @@
-const { getCommentCountByQueryId } = require('../db/commentController');
+const { getCommentCountByQueryId, getAnswersByQueryId } = require('../db/commentController');
 const pool = require('../db/pool');
 const { getTagsByQueryId } = require('../db/tagsController');
 const { getVotesByQueryId } = require('../db/votesController');
@@ -56,10 +56,36 @@ async function getAllQueries(req, res) {
     }
 }
 
-async function getQueryById(query_id) {
+async function getQueryByQueryId(req, res) {
+    const query_id = parseInt(req.query.id);
+    try {
+        const response = {};
+        sql = `
+            SELECT t1.id as id, title, body, created_at, user_id, user_name, profile_photo
+            FROM backend.queries AS t1
+            INNER JOIN backend.users AS t2
+            ON t1.user_id = t2.id
+            WHERE t1.id = $1
+        `
 
+        results = await pool.query(sql, [query_id]);
+
+        let query = results.rows[0];
+        query.tags = await getTagsByQueryId(query.id);
+        query.numOfComments = await getCommentCountByQueryId(query.id);
+        votes = await getVotesByQueryId(query.id);
+        query.upvotes = votes.upvotes;
+        query.downvotes = votes.downvotes;
+
+        response.query = results.rows[0];
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);
+    }
 }
 
 module.exports = {
-    getAllQueries
+    getAllQueries,
+    getQueryByQueryId
 }
