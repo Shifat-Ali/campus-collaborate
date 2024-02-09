@@ -7,10 +7,14 @@ import FeedPage from './Pages/Feed';
 import PostPage from './Pages/Postpage';
 import ProjectPage from './Pages/project';
 import RequestPage from './Pages/request';
+import ProfilePage from './Pages/profile';
+import CoursePage from './Pages/coursereviewmain';
+import WorkPage from './Pages/WorkPage';
+import IndividualCoursePage from './Pages/individualcourse';
 
 function App() {
-  return <ExplorePage/>;
+  return <IndividualCoursePage/>;
   
 }
 
-export default App;
+export default App
