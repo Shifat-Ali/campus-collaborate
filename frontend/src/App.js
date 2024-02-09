@@ -7,19 +7,13 @@ import FeedPage from './Pages/Feed';
 import PostPage from './Pages/Postpage';
 import ProjectPage from './Pages/project';
 import RequestPage from './Pages/request';
+import axios from "axios"
 
-function App() {
-  // return <ExplorePage/>;
-  // return <FeedPage/>
-  // fetch('http://localhost:2015/users?page=1&limit=10').then((response)=>{
-  //   console.log(response.body);
-  // }).catch((error)=>{
-  //   console.log(error);
-  // })
-  return (
-    
-  )
+async function App() {
+  const response =await axios.get("http://localhost:2015/users?page=1&limit=10");
+  console.log(response.data.users);
+  return (<LandingPage/>)
   
 }
 
-export default App;
+export default App

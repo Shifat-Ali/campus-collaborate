@@ -1,24 +1,26 @@
 const express = require("express");
 const app = express();
 const pool = require("./db/pool");
-const user = require("./routes/users");
+
 const query = require("./routes/queries");
 const { getAllUsers } = require("./controller/userController");
 const courses = require('./routes/courses')
 const project = require('./routes/projects')
+const cors=require("cors");
 
-
+// const project = require("./routes/projects")
+const userproject = require('./routes/user/projects')
 const {saveUser} =require("./controller/saveUserController");
 // const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
 app.get('/users', getAllUsers);
-app.use('/user', user);
+app.use('/user', userproject);
 app.use('/queries', query);
-app.use('/projects', project);
+// app.use('/projects', project);
 app.use('/courses',courses);
-
+app.use('/projects',project)
 
 
 // for saving the currently logged in user

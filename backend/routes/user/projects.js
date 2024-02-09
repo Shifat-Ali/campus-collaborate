@@ -2,11 +2,11 @@ const express = require('express')
 const router = express.Router()
 const auth = require('../../middlewares/auth')
 
-const proj = require('../../controller/projectController')
-
-router.get('/',proj.getProjects)
-router.post('/',auth,proj.addProject)
-router.put('/',auth,proj.editProject)
-router.delete('/',auth,proj.deleteProject)
+// const proj = require('../../controller/projectController')
+const proj = require('../../controller/userProjectController')
+router.get('/project',proj.getProjectsByUserId)
+router.post('/project/add',auth,proj.insertProject)
+router.put('/project/update',auth,proj.updateProject)
+router.delete('/project/delete',auth,proj.deleteProject)
 
 module.exports = router
