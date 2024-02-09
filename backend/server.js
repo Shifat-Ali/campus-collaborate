@@ -11,7 +11,7 @@ const { saveUser } = require("./controller/saveUserController");
 const cors = require('cors');
 
 
-// app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.get('/users', getAllUsers);
 app.use('/user', user);
@@ -24,6 +24,7 @@ app.use('/projects', project)
 
 // for saving the currently logged in user
 app.post("/save_user", (req, res) => {
+    console.log(req.body);
     const username = req.body.username;
     const email = req.body.email;
     const rollNumber = req.body.rollNumber;
