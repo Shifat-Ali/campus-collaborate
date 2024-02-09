@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ExplorePage from './Pages/explore';
 import CreatePage from './Pages/create';
 import LandingPage from './Pages/landing';
@@ -7,6 +7,7 @@ import FeedPage from './Pages/Feed';
 import PostPage from './Pages/Postpage';
 import ProjectPage from './Pages/project';
 import RequestPage from './Pages/request';
+import Profile from './Pages/profile';
 import axios from "axios"
 
 
@@ -18,9 +19,14 @@ import axios from "axios"
 function App() {
   // utility();
   return (
-    <LandingPage/>
+    // <Router>
+    //   <Routes>
+    //     `<Route path='/' exact Component={LandingPage} />
+    //   </Routes>
+    // </Router>
+    <Profile />
   )
-  
+
 }
 
 export default App

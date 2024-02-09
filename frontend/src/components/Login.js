@@ -9,7 +9,7 @@ const utility = async (userData) => {
     method: "post",
     url: "http://localhost:2015/save_user",
     headers: { "Content-Type": "application/json" },
-    data:JSON.stringify(userData)
+    data: JSON.stringify(userData)
   });
   console.log(response);
 };
@@ -24,8 +24,8 @@ const Login = () => {
       const username = data.name;
       const email = data.upn;
       const rollNumber = data.family_name;
-      const userData = {"username":username,"email":email,"rollNumber":rollNumber };
-      utility(userData);
+      // const userData = {"username":username,"email":email,"rollNumber":rollNumber };
+      // utility(userData);
 
     } else {
       console.log("Error while authentication", error);
