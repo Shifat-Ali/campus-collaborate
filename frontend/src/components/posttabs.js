@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import { Divider, Tab, Tabs, Box, Typography, Container } from "@mui/material";
 
-import Theme from "../themes";
+import Theme from "./themes";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import { ThemeProvider } from "styled-components";
-import NewProj from "./New/NewProj";
-import NewPost from "./New/newpost";
-import NewWork from "./New/NewWork";
+import NewProj from "./NewProj";
+import NewPost from "./newpost";
+import NewWork from "./NewWork";
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 

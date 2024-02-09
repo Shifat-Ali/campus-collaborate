@@ -6,7 +6,7 @@ import {
   Divider,
 } from "@mui/material";
 import React from "react";
-import Theme from "../themes";
+import Theme from "./themes";
 
 const RightBar = () => {
   return (
