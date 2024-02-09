@@ -5,10 +5,12 @@ const pool = require("./db/pool");
 const query = require("./routes/queries");
 const { getAllUsers } = require("./controller/userController");
 const courses = require('./routes/courses')
+const project = require('./routes/projects')
 
 const project = require("./routes/projects")
 const userproject = require('./routes/user/projects')
 const {saveUser} =require("./controller/saveUserController");
+const project=require("./routes/projects");
 const cors = require('cors');
 
 

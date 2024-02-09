@@ -1,9 +1,3 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
 .App {
   text-align: center;
 }
@@ -41,11 +35,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-.ql-toolbar {
-  background-color: #b3b3b3 !important;
-  border-radius: 10px 10px 0 0;
-}
-.ql-editor {
-  border-radius: 10px;
 }
