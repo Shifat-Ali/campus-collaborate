@@ -6,12 +6,15 @@ const exp = require('./user/experiences')
 const project = require('./user/projects')
 const course = require('./user/courses')
 const fol = require("../controller/followController");
-
+const skill = require('../routes/user/skills')
+const recommendation = require('../routes/user/recommendations')
 
 router.use('/certificates',certs);
 router.use('/experience',exp);
 router.use('/projects',project);
 router.use('/courses',course);
+router.use('/skills',skill);
+router.use('/recommendations',recommendation);
 
 router.get('/followers',fol.getAllFollowers);
 router.get('/following',fol.getUserFollowing);

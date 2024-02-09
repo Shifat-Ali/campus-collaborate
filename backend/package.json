@@ -11,6 +11,8 @@
   "author": "shifat",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dependencies": "^0.0.1",
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "faker": "^6.6.6",

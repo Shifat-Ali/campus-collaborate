@@ -63,45 +63,42 @@ async function getAllProject(req, res) {
 
 async function getProjectById(req, res) {
 
-    const project_id = req.query.project_id;
-    const page = req.query.page;
-    const limit = req.query.limit;
+
+try{
+        
+    const project_id = req.query.id;
+  
     sql =`SELECT 
     t1.project_name,
     t1.tagline,
     t1.description,
+    t1.votes,
     t1.multimedia,
     t1.url,
     t1.thumbnail,
     t2.username,
-    t2.photo_profile
+    t2.profile_photo
 FROM 
     backend.projects AS t1
 INNER JOIN 
     backend.users AS t2
 ON 
-    t1.user_id = t2.id
+    t1.owner_id = t2.id
 WHERE
     t1.id = $1; -- Replace '?' with the specified project ID`
 
-       try{
+
+
+const response = {};
         const result = await pool.query(sql,[project_id])
-        //for collaborator 
-        const sql = `SELECT *
-//                      FROM backend.collaborators
-//                      JOIN project ON project.id =collaborators.project_id
-//                      JOIN user ON user.id = collaborators.collaborators_id
-//                      WHERE project_id =$1`;
-        const collab  = await pool.query(sql, [projectId]);
-        if (result.rows.length === 0) {
-            res.status(200).json({ message: 'This project has no collaborators' });
-        } else {
-            result.collaborator = collab
-        result.feedback =  getFeedbackByProjectId(projet_id,page,limit)
+    
+        response.collaborators = getCollaboratorsByProjectId(project_id)
+       response.tags = getTagsByProjectId(project_id)
         response.project = result.rows[0]
         res.status(200).json(response)
        }
-    }
+    
+
        catch(err){
         console.log(err.message);
         res.status(500).send(err.message);
@@ -109,51 +106,51 @@ WHERE
 
 }
 
-async function getCommentById(req,res) {
+// async function getCommentById(req,res) {
 
+//     try {
+//         const projectId = req.params.id;
+//         const page = req.params.page;
+//         const limit = req.params.limit;
+
+//         // Calculate the offset based on the page and limit
+//         const offset = (page - 1) * limit;
+
+//         // Call the function to get feedback by project ID
+//         const feedback = await getFeedbackByProjectId(projectId, offset, limit);
+
+//         res.json(feedback);
+//     } catch (error) {
+//         console.error('Error fetching feedback:', error);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// }
+
+
+
+
+
+
+async function getCollaboratorsByProjectId(project_id) {
     try {
-        const projectId = req.params.id;
-        const page = req.params.page;
-        const limit = req.params.limit;
-
-        // Calculate the offset based on the page and limit
-        const offset = (page - 1) * limit;
-
-        // Call the function to get feedback by project ID
-        const feedback = await getFeedbackByProjectId(projectId, offset, limit);
-
-        res.json(feedback);
-    } catch (error) {
-        console.error('Error fetching feedback:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-}
-
-
-
-
-
-
-async function getCollaboratorsByProjectId(req, res) {
-    try {
-        const projectId = req.params.id;
+        const projectId = project_id;
         const sql = `
             SELECT u.username
             FROM backend.collaborators AS c
             INNER JOIN backend.users AS u ON c.collaborator_id = u.id
             WHERE c.project_id = $1
-        `;
+        `
         const result = await pool.query(sql, [projectId]);
         
         if (result.rows.length === 0) {
             return res.status(200).json({ message: 'This project has no collaborators' });
         } else {
             const collaborators = result.rows.map(row => row.username);
-            return res.status(200).json(collaborators);
+            return collaborators
         }
     } catch (error) {
         console.error('Error retrieving collaborators:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        
     }
 }
 

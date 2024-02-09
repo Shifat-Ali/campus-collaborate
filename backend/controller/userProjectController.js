@@ -1,25 +1,29 @@
 const z = require('zod');
-
-async function getProjectsByUserId(userId) {
+const pool = require('../db/pool');
+async function getProjectsByUserId(req, res) {
     try {
+        const userId = req.body.userId;
+
         // Construct the SQL query to retrieve projects for a particular user
-        const query = `
+        const sql = `
             SELECT p.id, p.project_name, p.tagline, p.description
             FROM backend.projects p
-            INNER JOIN backend.user_project up ON p.id = up.project_id
-            WHERE up.user_id = $1;
+            INNER JOIN backend.collaborators c ON p.id = c.project_id
+            INNER JOIN backend.users u ON c.collaborator_id = u.id
+            WHERE u.id = $1;
         `;
         
         // Execute the query to retrieve projects for the user
-        const result = await pool.query(query, [userId]);
+        const result = await pool.query(sql, [userId]);
 
         // Return the fetched projects
-        return result.rows;
+        res.status(200).json(result.rows);
     } catch (error) {
         console.error('Error retrieving projects by user ID:', error);
-        throw error;
+        res.status(500).json({ error: 'Internal server error' });
     }
 }
+
 
 
 
@@ -85,9 +89,9 @@ async function insertProject(req, res) {
 
 
 async function updateProject(req, res) {
-    const projectId = req.params.id; // Assuming the project ID is passed in the URL parameter
-    const userId = req.user.id; // Assuming the user ID is available in the request object (after authentication)
-    const updateData = req.body;
+    const projectId = req.body.project_id; // Assuming the project ID is passed in the URL parameter
+    const userId = req.body.user_id; // Assuming the user ID is available in the request object (after authentication)
+    const updateData = req.body.data;
 
     try {
         // Validate the update data against the project schema
@@ -161,9 +165,8 @@ async function updateProject(req, res) {
 }
 
 async function deleteProject(req, res) {
-    const projectId = req.params.id; // Assuming the project ID is passed in the URL parameter
-    const userId = req.user.id; // Assuming the user ID is available in the request object (after authentication)
-
+    const projectId = req.body.project_id; 
+    const userId = req.body.user_id; 
     try {
         // Check if the project with the given ID belongs to the user who is deleting
         const checkOwnershipQuery = `
