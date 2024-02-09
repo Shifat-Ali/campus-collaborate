@@ -45,6 +45,20 @@ async function getCommentCountByQueryId(query_id) {
     }
 }
 
+async function getCommentCountByProjectId(project_id) {
+    try {
+        sql = `
+            SELECT COUNT(id)
+            FROM backend.feedback
+            WHERE project_id = $1
+        `
+        results = await pool.query(sql, [project_id]);
+        return results.rows[0].count;
+    } catch (error) {
+        throw error;
+    }
+}
+
 async function getLimitedCommentReplyByCommentId(comment_id) {
     try {
         sql = `
@@ -126,7 +140,7 @@ async function getAnswersByQueryId(query_id, offset, limit) {
     }
 }
 
-//getAnswersByQueryId(838, 0, 5); // example to test the nested comment {uncomment the console.log in above function}
+// getAnswersByQueryId(838, 0, 5); // example to test the nested comment {uncomment the console.log in above function}
 
 async function getFeedbackByProjectId(project_id, offset, limit) {
     try {
@@ -164,16 +178,18 @@ async function addComment(user_id, body) {
         sql = `
             INSERT INTO backend.comments (user_id, body)
             VALUES ($1, $2)
-            RETURNING id
+            RETURNING *
         `
         results = await pool.query(sql, [user_id, body]);
-        // console.log(results);
-        return result.rows[0];
+        // console.log(results.rows[0]);
+        return results.rows[0];
     }
     catch (error) {
         throw error;
     }
 }
+
+// addComment(23, 'sfs');
 
 async function addAnswer(query_id, user_id, body) {
     try {
@@ -246,6 +262,7 @@ module.exports = {
     addCommentReply,
     getAnswersByQueryId,
     getCommentCountByQueryId,
+    getCommentCountByProjectId,
     getAllCommentReplyByCommentId,
     getFeedbackByProjectId,
     deleteCommentByCommentId,

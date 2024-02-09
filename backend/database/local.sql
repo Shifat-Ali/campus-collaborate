@@ -429,3 +429,29 @@ ADD
 -- 	*
 -- from
 -- 	tags;
+
+CREATE TABLE "user_course_ratings" (
+	"course_id" integer,
+	"user_id" integer,
+	"course_relevance_rating" VARCHAR(1),
+	"understandability_rating" VARCHAR(1),
+	"ease_of_scoring_rating" VARCHAR(1),
+	"faculty_rating" VARCHAR(1),
+	"date" timestamp default now(),
+	UNIQUE (COURSE_ID, USER_ID),
+	PRIMARY KEY (COURSE_ID, USER_ID),
+	FOREIGN KEY (COURSE_ID) 
+		REFERENCES backend.courses (id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	FOREIGN KEY (USER_ID)
+		REFERENCES backend.users (id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);
+
+SELECT * FROM backend.reviews;
+
+ALTER TABLE backend.reviews
+DROP title,
+DROP rating;

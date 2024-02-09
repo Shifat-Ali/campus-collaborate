@@ -3,5 +3,5 @@ const router = require('express').Router()
 
 
 router.get('/', query.getAllQueries);
-// router.get("/:id", query.getQueryById);
+router.get('/:id', query.getQueryByQueryId);
 module.exports = router;
