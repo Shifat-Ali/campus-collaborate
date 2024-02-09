@@ -17,7 +17,7 @@ import {
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import Tags from "../Tags";
+import Tags from "./Tags";
 
 const MyQuillEditor = () => {
   const [content, setContent] = useState("");
