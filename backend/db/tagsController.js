@@ -42,5 +42,6 @@ async function getTagsByProjectId(project_id) {
 }
 
 module.exports = {
-    getTagsByQueryId
+    getTagsByQueryId,
+    getTagsByProjectId
 }
