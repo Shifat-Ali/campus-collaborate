@@ -8,6 +8,8 @@ import PostAddIcon from "@mui/icons-material/PostAdd";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import { ThemeProvider } from "styled-components";
 import NewProj from "./NewProj";
+import NewPost from "./newpost";
+import NewWork from "./NewWork";
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -20,13 +22,7 @@ function CustomTabPanel(props) {
       {...other}
     >
       {value === index &&
-        (index === 0 ? (
-          <Typography>Second</Typography>
-        ) : index === 1 ? (
-          <NewProj />
-        ) : (
-          <Typography>Third</Typography>
-        ))}
+        (index === 0 ? <NewPost /> : index === 1 ? <NewProj /> : <NewWork />)}
     </div>
   );
 }
@@ -52,11 +48,20 @@ export default function PostTabs() {
         <Container
           sx={{
             borderBottom: "1px solid black",
+            display: "flex",
+            flexDirection: "row",
+            flexGrow: 1,
+
             // height: "40px",
           }}
           className="boxcon"
         >
-          <Tabs value={value} onChange={handleChange} variant="fullWidth">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="fullWidth"
+            sx={{ width: "100%" }}
+          >
             <Tab
               icon={<InsertDriveFileIcon />}
               iconPosition="start"
@@ -78,15 +83,11 @@ export default function PostTabs() {
             />
           </Tabs>
         </Container>
-        <CustomTabPanel index={0} value={value}>
-          hehe
-        </CustomTabPanel>
-        <CustomTabPanel index={1} value={value}>
-          hehe23
-        </CustomTabPanel>
-        <CustomTabPanel index={2} value={value}>
-          hehe3
-        </CustomTabPanel>
+        <CustomTabPanel index={0} value={value} />
+
+        <CustomTabPanel index={1} value={value} />
+
+        <CustomTabPanel index={2} value={value} />
       </Box>
     </ThemeProvider>
   );

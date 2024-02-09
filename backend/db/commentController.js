@@ -151,6 +151,7 @@ async function getFeedbackByProjectId(project_id, offset, limit) {
             ON t1.comment_id = t2.id
             INNER JOIN backend.users AS t3
             ON t2.user_id = t3.id
+            
             WHERE t1.project_id = $1
             ORDER BY created_at DESC
             OFFSET $2 LIMIT $3;

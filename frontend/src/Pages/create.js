@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Login from "../components/Login";
 import { styled, alpha } from "@mui/material/styles";
 import {
   ThemeProvider,
@@ -12,42 +12,42 @@ import {
   Toolbar,
   InputBase,
   Divider,
-  Typography,
+  Typography, 
   Box,
   Tab,
   Tabs,
 } from "@mui/material";
-import Theme from "./themes";
-import UpBar from "./upBar";
-import SideBar from "./sideBar";
-import PostTabs from "./posttabs";
+import Theme from "../components/themes";
+import SideBar from "../components/Leftbar";
+import PostTabs from "../components/posttabs";
+import RightBar from "../components/RightBar";
 
 const CreatePost = () => {
   return (
+    <>
     <ThemeProvider theme={Theme}>
       <Grid container spacing={0}>
         <Grid item>
           <SideBar />
         </Grid>
         <Grid item sx={{ flexGrow: 1 }}>
-          <UpBar />
+          
 
           <Box>
-            <Container sx={{ pt: 10 }}>
-              <Typography variant="h4">Create a Post</Typography>
-            </Container>
+          
             <Grid container sx={{ mt: 5 }} spacing={2}>
-              <Grid item xs={8}>
+              <Grid item xs={9}>
                 <PostTabs />
               </Grid>
-              <Grid item xs={4}>
-                heh
+              <Grid item xs={3}>
+                <RightBar />
               </Grid>
             </Grid>
           </Box>
         </Grid>
       </Grid>
     </ThemeProvider>
+    </>
   );
 };
 

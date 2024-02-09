@@ -7,12 +7,12 @@ import {
   Paper,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import img from "../img/render.jpg";
-import Theme from "./themes";
-import Navbar from "./navbar";
-import Inputlogin from "./inputLogin";
-import YourComponent from "./checkcom";
-import Footer from "./footer";
+import img from "../media/render.jpg";
+import Theme from "../components/themes";
+import Navbar from "../components/navbar";
+import Inputlogin from "../components/inputLogin";
+import YourComponent from "../components/checkcom";
+import Footer from "../components/footer";
 
 export default function LandingPage() {
   const cards = [
