@@ -1,18 +1,18 @@
 const pool = require('../db/pool')
 
 async function getAllUsers(req, res) {
-    const page = parseInt(req.query.page);
-    const limit = parseInt(req.query.limit);
+    let page = parseInt(req.query.page);
+    let limit = parseInt(req.query.limit);
     const maxLimit = 20;
+    if(isNaN(page)) page =1;
+    if(isNaN(limit) || limit > maxLimit)limit =maxlimit ;
     try {
-        if (isNaN(page) || isNaN(limit)) {
-            throw new Error('page and limit should be provided');
-        }
-        if (limit > maxLimit) limit = maxLimit;
+       
+       
         const response = {};
         const startIndex = (page - 1) * limit;
         const endIndex = page * limit;
-        let results = await pool.query("SELECT COUNT(id) FROM backend.users");
+        let results = await pool.query("SELECT COUNT(id) FROM backend.courses");
         const count = JSON.parse(JSON.stringify(results.rows))[0].count;
         if (page > 1) {
             response.previous = {

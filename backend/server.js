@@ -3,7 +3,7 @@ const app = express();
 const pool = require("./db/pool")
 const user = require('./routes/users')
 const project = require('./routes/projects')
-
+const {insertFakeProjects} = require('./database/dummyproject')
 app.use(express.json());
 app.use('/user',user);
 app.use('/projects',project);
@@ -33,5 +33,7 @@ app.use(express.json());
 app.get('/users', getAllUsers);
 app.use('/user', user);
 app.use('/queries', query);
+app.use('/projects', project);
+app.get('/fakerpop',insertFakeProjects)
 
 app.listen(2015, () => console.log("Listening on port 2015"))

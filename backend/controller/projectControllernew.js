@@ -1,9 +1,12 @@
 const express = require('express');
 const pool = require('../db/pool');
 const { z } = require('zod');
-
+const {getTagsByProjectId} = require('../db/tagsController')
+const {getVotesByProjectId} = require('../db/votesController')
+const {getFeedbackByProjectId}=require('../db/commentController')
 async function getAllProject(req, res) {
     let page = parseInt(req.query.page);
+    console.log(page)
    let limit = parseInt(req.query.limit);
     const maxLimit = 20;
     if (isNaN(limit) || limit > maxLimit) limit = maxLimit;
@@ -26,17 +29,28 @@ async function getAllProject(req, res) {
                 limit: limit,
             }
         }
-
         
 
-        sql = ` SELECT *
-                FROM backend.projects
-                ORDER BY created_at DESC
-                OFFSET ${startIndex} LIMIT ${limit};
+        sql = ` SELECT t1.id as id, project_name,tagline ,url,thumbnail,username
+        FROM backend.projects as t1
+        INNER JOIN backend.users as t2
+        ON t1.owner_id = t2.id
+        ORDER BY created_at DESC
+        OFFSET ${startIndex} LIMIT ${limit};
             `
         results = await pool.query(sql)
 
+        for(let proj of results.rows ){
+          
+            proj.tags = await getTagsByProjectId(proj.id);
+       
+            //    comment for the project to be added 
 
+            votes = await getVotesByProjectId(proj.id);
+            proj.upvotes = votes.upvotes;
+            proj.downvotes = votes.downvotes;
+
+        }
         response.projects = results.rows;
         res.status(200).json(response);
     }
@@ -47,113 +61,110 @@ async function getAllProject(req, res) {
 
 }
 
-// async function getProjectById(req, res) {
-//     try {
-//         const user_id = req.query.user_id;
-//         const fromDate = new Date();
-//         const result = await pool.query("SELECT * FROM backend.projects WHERE owner_id = user_id");
+async function getProjectById(req, res) {
 
-//         console.log(result.row);
-//         const toDate = new Date();
+    const project_id = req.query.project_id;
+    const page = req.query.page;
+    const limit = req.query.limit;
+    sql =`SELECT 
+    t1.project_name,
+    t1.tagline,
+    t1.description,
+    t1.multimedia,
+    t1.url,
+    t1.thumbnail,
+    t2.username,
+    t2.photo_profile
+FROM 
+    backend.projects AS t1
+INNER JOIN 
+    backend.users AS t2
+ON 
+    t1.user_id = t2.id
+WHERE
+    t1.id = $1; -- Replace '?' with the specified project ID`
 
-//         const response = {
-//             rows: result.rows,
-//             elapsed: toDate.getTime() - fromDate.getTime(),
-//             method: 'pool'
-//         };
-//         res.status(200).json(response);
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).send(err.message);
-//     }
-// }
-
-// async function voteProjectById(req, res) {
-//     try {
-//         const sql = `
-//             SELECT
-//                 COUNT(CASE WHEN vote = 'up' THEN 1 END) AS upvotes,
-//                 COUNT(CASE WHEN vote = 'down' THEN 1 END) AS downvotes
-//             FROM backend."projectvotes"
-//             WHERE query_id = 512;
-//         `;
-//         const results = await pool.query(sql);
-//         return results.rows[0];
-//     } catch (err) {
-//         throw err;
-// //     }
-// }
-
-// Define a schema using Zod
-const projectSchema = z.object({
-    owner_id: z.number(),
-    project_name: z.string().max(50),
-    tagline: z.string().max(150),
-    votes: z.number().optional(),
-    url: z.string().url().max(500),
-    thumbnail: z.string(),
-    description: z.string().max(5000),
-    multimedia: z.string().optional()
-});
-
-async function insertProject(req, res) {
-    let projectData = req.body;
-    console.log(projectData);
-
-    try {
-        const validatedData = projectSchema.parse(projectData);
-            
-        const result = await pool.query(
-            'INSERT INTO backend.projects (owner_id, project_name, tagline, votes, url, thumbnail, description, multimedia) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-            [
-                validatedData.owner_id,
-                validatedData.project_name,
-                validatedData.tagline,
-                validatedData.votes || null,
-                validatedData.url || null,
-                validatedData.thumbnail,
-                validatedData.description,
-                validatedData.multimedia || null
-            ]
-        );
-
-        console.log('Inserted project:', result.rows[0]);
-        res.status(201).json(result.rows[0]);
-    } catch (error) {
-        console.error('Validation failed or database error:', error);
-        res.status(400).json({ error: 'Invalid input' });
-    }
-}
-
-// async function getCollaboraterByProjectId(req, res) {
-//     try {
-//         const projectId = req.query.project_id;
-//         const sql = `SELECT *
+       try{
+        const result = await pool.query(sql,[project_id])
+        //for collaborator 
+        const sql = `SELECT *
 //                      FROM backend.collaborators
 //                      JOIN project ON project.id =collaborators.project_id
 //                      JOIN user ON user.id = collaborators.collaborators_id
 //                      WHERE project_id =$1`;
-//         const result = await pool.query(sql, [projectId]);
-//         if (result.rows.length === 0) {
-//             res.status(200).json({ message: 'This project has no collaborators' });
-//         } else {
-//             return result.rows;
-//         }
-//     } catch (error) {
-//         console.error('Validation failed or database error:', error);
-//     }
-// }
+        const collab  = await pool.query(sql, [projectId]);
+        if (result.rows.length === 0) {
+            res.status(200).json({ message: 'This project has no collaborators' });
+        } else {
+            result.collaborator = collab
+        result.feedback =  getFeedbackByProjectId(projet_id,page,limit)
+        response.project = result.rows[0]
+        res.status(200).json(response)
+       }
+    }
+       catch(err){
+        console.log(err.message);
+        res.status(500).send(err.message);
+       }
 
-// async function getCommentById(req, res) {
-//     const projectId = req.query.projec_id;
-//     // Implement your logic here
-// }
+}
+
+async function getCommentById(req,res) {
+
+    try {
+        const projectId = req.params.id;
+        const page = req.params.page;
+        const limit = req.params.limit;
+
+        // Calculate the offset based on the page and limit
+        const offset = (page - 1) * limit;
+
+        // Call the function to get feedback by project ID
+        const feedback = await getFeedbackByProjectId(projectId, offset, limit);
+
+        res.json(feedback);
+    } catch (error) {
+        console.error('Error fetching feedback:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
+
+
+
+
+async function getCollaboratorsByProjectId(req, res) {
+    try {
+        const projectId = req.params.id;
+        const sql = `
+            SELECT u.username
+            FROM backend.collaborators AS c
+            INNER JOIN backend.users AS u ON c.collaborator_id = u.id
+            WHERE c.project_id = $1
+        `;
+        const result = await pool.query(sql, [projectId]);
+        
+        if (result.rows.length === 0) {
+            return res.status(200).json({ message: 'This project has no collaborators' });
+        } else {
+            const collaborators = result.rows.map(row => row.username);
+            return res.status(200).json(collaborators);
+        }
+    } catch (error) {
+        console.error('Error retrieving collaborators:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
+
 
 module.exports = {
     getAllProject,
-//     getProjectById,
+    getProjectById,
 //     voteProjectById,
-    insertProject
-//     getCollaboraterByProjectId,
+   
+getCollaboratorsByProjectId
 //     getCommentById
 };
