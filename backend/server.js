@@ -5,9 +5,8 @@ const user = require("./routes/users");
 const query = require("./routes/queries");
 const { getAllUsers } = require("./controller/userController");
 const courses = require('./routes/courses')
-
-
 const {saveUser} =require("./controller/saveUserController");
+const project=require("./routes/projects");
 const cors = require('cors');
 
 
