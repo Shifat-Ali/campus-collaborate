@@ -8,9 +8,9 @@ const Tags = () => {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const response = await axios.get("/tags");
-        setAvailableTags(response.data);
-        console.log(availableTags);
+        const response = await axios.get("http://localhost:2015/tags");
+        const sortedTags = response.data.sort(); // Sort the tags synchronously
+        setAvailableTags(sortedTags);
       } catch (error) {
         console.error("Error fetching tags:", error);
       }

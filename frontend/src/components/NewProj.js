@@ -58,9 +58,28 @@ const MyQuillEditor = () => {
 
 export default function NewProj() {
   const [selectedTags, setSelectedTags] = useState([]);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [link, setLink] = useState("");
 
   const handleTagAdd = (tag) => {
     setSelectedTags([...selectedTags, tag]);
+  };
+
+  const handlePost = async () => {
+    try {
+      const response = await axios.post("http://localhost:2015/projects", {
+        title,
+        description,
+        link,
+        tags: selectedTags,
+      });
+      console.log("Project posted successfully:", response.data);
+      // Reset state or show success message
+    } catch (error) {
+      console.error("Error posting project:", error);
+      // Handle error
+    }
   };
   return (
     <Paper>
@@ -127,6 +146,8 @@ export default function NewProj() {
               ),
             }}
             label="Link to Project"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
             variant="outlined"
           />
         </Container>
@@ -142,6 +163,8 @@ export default function NewProj() {
             autoComplete="off"
             label="Title"
             variant="outlined"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             InputLabelProps={{ shrink: true }} // Ensure label does not move
           />
         </Container>
@@ -157,6 +180,8 @@ export default function NewProj() {
             autoComplete="off"
             label="Add Description"
             variant="outlined"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             InputLabelProps={{ shrink: true }} // Ensure label does not move
           />
         </Container>
@@ -181,6 +206,7 @@ export default function NewProj() {
           ))}
         </Box>
         <Button
+          onClick={handlePost}
           sx={{
             backgroundColor: "#1976d2",
             marginTop: "10px",
