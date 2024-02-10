@@ -4,8 +4,8 @@ import PermanentDrawerLeft from '../components/Leftbar';
 import RightPart from '../components/RightPartExplore';
 import { AccountContext } from '../context/AccountProvider.jsx';
 function ExplorePg() {
-  const { user, setUser } = useContext(AccountContext);
-  console.log(user);
+  // const { user, setUser } = useContext(AccountContext);
+  // console.log(user);
   const currentUser = "User1";
   return (
     <div style={{ display: 'flex', background: '#FAFAFA', minHeight: '100vh' }}>
