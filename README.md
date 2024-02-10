@@ -19,6 +19,20 @@ If you encounter any bugs or issues while using the platform, please report them
 
 ## Steps for Local Development 
 
+
+### Frontend
+
+cd frontend    
+npm install dependencies  
+npm start
+
+### Backend
+
+cd backend  
+npm install dependencies  
+npm start  
+
+## Dependencies
 Frontend development:-
 TechStacks Used- HTML,CSS,React.JS,MaterialUI,Bootstrap,Tailwind
 
