@@ -57,11 +57,13 @@ async function getAllQueries(req, res) {
 }
 
 async function getQueryByQueryId(req, res) {
-    const query_id = parseInt(req.query.id);
+    // console.log('skjfnskjfs\n', req);
+    const query_id = parseInt(req.params.id);
+    // console.log(query_id);
     try {
         const response = {};
         sql = `
-            SELECT t1.id as id, title, body, created_at, user_id, user_name, profile_photo
+            SELECT t1.id as id, title, body, created_at, user_id, username, profile_photo
             FROM backend.queries AS t1
             INNER JOIN backend.users AS t2
             ON t1.user_id = t2.id
@@ -71,13 +73,14 @@ async function getQueryByQueryId(req, res) {
         results = await pool.query(sql, [query_id]);
 
         let query = results.rows[0];
+        // console.log(query);
         query.tags = await getTagsByQueryId(query.id);
         query.numOfComments = await getCommentCountByQueryId(query.id);
         votes = await getVotesByQueryId(query.id);
         query.upvotes = votes.upvotes;
         query.downvotes = votes.downvotes;
 
-        response.query = results.rows[0];
+        response.query = query;
         res.status(200).json(response);
     } catch (error) {
         console.log(error);

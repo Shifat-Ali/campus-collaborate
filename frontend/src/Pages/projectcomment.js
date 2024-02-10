@@ -1,20 +1,19 @@
 import React from "react";
-import PostCard2 from "./querypost";
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 import axios from "axios";
+import CommentSection from "../components/Comment";
 
-export default function Query() {
+export default function ProjectComment() {
     const { id } = useParams();
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-    var query = null;
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:2015/queries/${id}`);
+                const response = await axios.get(`http://localhost:2015/comments/projects/${id}`);
                 setData(JSON.parse(JSON.stringify(response.data)));
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -27,7 +26,9 @@ export default function Query() {
     }, []); // Empty dependency array means this effect runs once when the component mounts
 
     // let query = data.query;
-    // console.log('aaaaa', query);
+    // console.log('comment', data.comments);
+
+
 
     if (loading) {
         return <p><Loading /></p>;
@@ -35,6 +36,6 @@ export default function Query() {
         //   <LoadingScreen />;
     }
     return <>
-        <PostCard2 data={data.query}></PostCard2>
+        <CommentSection data={data.comments} />
     </>;
 }

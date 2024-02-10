@@ -218,13 +218,13 @@ export default function PostCard1(props) {
             {/* {loremText} */}
             {query.body}
           </Typography>
-          <Link
+          {/* <Link
             href="https://www.google.com"
             target="_blank"
             rel="noopener noreferrer"
           >
             https://www.google.com
-          </Link>
+          </Link> */}
 
         </CardContent>
       </div>
