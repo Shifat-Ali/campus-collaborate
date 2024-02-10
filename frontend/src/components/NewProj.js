@@ -187,6 +187,9 @@ export default function NewProj() {
             color: "white",
             width: "10%",
             marginLeft: "auto",
+            "&:hover": {
+              backgroundColor: "red",
+            },
           }}
         >
           POST
