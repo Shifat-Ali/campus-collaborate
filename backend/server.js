@@ -8,6 +8,7 @@ const courses = require('./routes/courses')
 const userproject = require('./routes/user/projects')
 const { getAllUsers } = require("./controller/userController");
 const { saveUser } = require("./controller/saveUserController");
+const {getUserId}=require("./controller/getIdByUserId")
 const cors = require('cors');
 
 
@@ -20,6 +21,7 @@ app.use('/user', userproject);
 app.use('/queries', query);
 app.use('/courses', courses);
 app.use('/projects', project)
+app.use("/userId",getUserId);
 
 
 // for saving the currently logged in user
