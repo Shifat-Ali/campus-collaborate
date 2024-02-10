@@ -8,19 +8,22 @@ const course = require('./user/courses')
 const fol = require("../controller/followController");
 const skill = require('../routes/user/skills')
 const recommendation = require('../routes/user/recommendations')
+const { getUser } = require('../controller/getUser')
 
-router.use('/certificates',certs);
-router.use('/experience',exp);
-router.use('/projects',project);
-router.use('/courses',course);
-router.use('/skills',skill);
-router.use('/recommendations',recommendation);
+router.use('/', getUser);
 
-router.get('/followers',fol.getAllFollowers);
-router.get('/following',fol.getUserFollowing);
-router.post('/follow/:id',fol.followUser);
-router.post('/unfollow/:id',fol.unfollowUser);
+router.use('/certificates', certs);
+router.use('/experience', exp);
+router.use('/projects', project);
+router.use('/courses', course);
+router.use('/skills', skill);
+router.use('/recommendations', recommendation);
+
+router.get('/followers', fol.getAllFollowers);
+router.get('/following', fol.getUserFollowing);
+router.post('/follow/:id', fol.followUser);
+router.post('/unfollow/:id', fol.unfollowUser);
 
 
 
-module.exports=router;
+module.exports = router;

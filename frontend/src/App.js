@@ -6,10 +6,14 @@ import LandingPage from './Pages/landing';
 import FeedPage from './Pages/Feed';
 import PostPage from './Pages/Postpage';
 import ProjectPage from './Pages/project';
+import QueryPage from './Pages/querypage';
 import RequestPage from './Pages/request';
 import Profile from './Pages/profile';
 import CourseRevMain from './Pages/coursereviewmain';
-import axios from "axios"
+import WorkOpp from './Pages/WorkPage';
+import PageNotFound from './Pages/error';
+import IndividualCourse from './Pages/individualcourse';
+import MyProfilePage from './Pages/myprofile';
 
 
 // const utility=async ()=>{
@@ -26,10 +30,26 @@ function App() {
       <Route path='/explore' element={<ExplorePage />} />
       <Route path='/feed' element={<FeedPage />} />
       <Route path='/post' element={<PostPage />} />
-      <Route path='/project' element={<ProjectPage />} />
+      <Route path='/queries' element={<QueryPage />} >
+        <Route
+          path=":id"
+          element={({ params }) => <QueryPage id={params.id} />}
+        />
+      </Route>
+      <Route path='/project' element={<ProjectPage />} >
+        <Route
+          path=":id"
+          element={({ params }) => <ProjectPage id={params.id} />}
+        />
+      </Route>
       <Route path='/request' element={<RequestPage />} />
-      <Route path='/profile' element={<Profile />} />
-      <Route path='/courses' element={<CourseRevMain />} />
+      <Route path='/profile/:id' element={<Profile />} />
+      <Route path='/profile' element={<MyProfilePage />} />
+      <Route path='/courses' element={<CourseRevMain />}>
+        <Route path=':courseId' element={<IndividualCourse />} />
+      </Route>
+      <Route path='/opportunities' element={<WorkOpp />} />
+      <Route path='*' element={<PageNotFound />} />
     </Routes>
   )
 

@@ -11,8 +11,6 @@ CREATE TABLE "follows" (
 CREATE TABLE "users" (
 	"id" serial PRIMARY KEY,
 	"username" VARCHAR(50),
-	"firstname" VARCHAR(100),
-	"lastname" VARCHAR(100),
 	"email" VARCHAR(50) UNIQUE,
 	"contact_no" VARCHAR(11),
 	"about" text,
@@ -429,7 +427,6 @@ ADD
 -- 	*
 -- from
 -- 	tags;
-
 CREATE TABLE "user_course_ratings" (
 	"course_id" integer,
 	"user_id" integer,
@@ -440,18 +437,15 @@ CREATE TABLE "user_course_ratings" (
 	"date" timestamp default now(),
 	UNIQUE (COURSE_ID, USER_ID),
 	PRIMARY KEY (COURSE_ID, USER_ID),
-	FOREIGN KEY (COURSE_ID) 
-		REFERENCES backend.courses (id)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
-	FOREIGN KEY (USER_ID)
-		REFERENCES backend.users (id)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE
+	FOREIGN KEY (COURSE_ID) REFERENCES backend.courses (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (USER_ID) REFERENCES backend.users (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-SELECT * FROM backend.reviews;
+SELECT
+	*
+FROM
+	backend.reviews;
 
-ALTER TABLE backend.reviews
-DROP title,
-DROP rating;
+ALTER TABLE
+	backend.reviews DROP title,
+	DROP rating;

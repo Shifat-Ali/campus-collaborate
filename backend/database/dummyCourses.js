@@ -4,7 +4,7 @@ const pool = require('../db/pool');
 async function insertDummyData() {
     try {
 
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 20; i++) {
             const title = faker.hacker.adjective(); // Using the "hacker" category for more technical titlesx
             const description = faker.lorem.paragraphs(); // Using the "lorem" category for diverse and reali
             const url = faker.internet.url();
