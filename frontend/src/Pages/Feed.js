@@ -22,6 +22,7 @@ function FeedPage() {
             <ArrowForwardIcon style={{ fontSize: '15px' }} />
           </div>
           <ProfilePage />
+          
         </div>
       </div>
       <div>

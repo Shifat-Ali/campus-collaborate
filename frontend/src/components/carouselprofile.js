@@ -8,6 +8,7 @@ import {
 } from 'mdb-react-ui-kit';
 import ProfilePage from './FeedPage';
 import Recommendations from './Recommendations';
+import Certificate from './Certificate';
 
 export default function Carousel() {
   const [justifyActive, setJustifyActive] = useState('tab1');
@@ -28,7 +29,7 @@ export default function Carousel() {
             <MDBTabsLink
               onClick={() => handleJustifyClick('tab1')}
               active={justifyActive === 'tab1'}
-              style={{ backgroundColor: justifyActive === 'tab1' ? 'white' : '#ECECEC', borderRadius: justifyActive === 'tab1' ? '8px' : '0px' }}
+              style={{ backgroundColor: justifyActive === 'tab1' ? 'white' : '#ECECEC', borderRadius: justifyActive === 'tab1' ? '8px' : '0px' ,color:justifyActive==='tab1'? 'black':'black'}}
             >
               Posts
             </MDBTabsLink>
@@ -37,7 +38,7 @@ export default function Carousel() {
             <MDBTabsLink
               onClick={() => handleJustifyClick('tab2')}
               active={justifyActive === 'tab2'}
-              style={{ backgroundColor: justifyActive === 'tab2' ? 'white' : '#ECECEC', borderRadius: justifyActive === 'tab2' ? '8px' : '0px' }}
+              style={{ backgroundColor: justifyActive === 'tab2' ? 'white' : '#ECECEC', borderRadius: justifyActive === 'tab2' ? '8px' : '0px' ,color:justifyActive==='tab2'? 'black':'black'}}
             >
               Recommendations
             </MDBTabsLink>
@@ -46,9 +47,9 @@ export default function Carousel() {
             <MDBTabsLink
               onClick={() => handleJustifyClick('tab3')}
               active={justifyActive === 'tab3'}
-              style={{ backgroundColor: justifyActive === 'tab3' ? 'white' : '#ECECEC', borderRadius: justifyActive === 'tab3' ? '8px' : '0px' }}
+              style={{ backgroundColor: justifyActive === 'tab3' ? 'white' : '#ECECEC', borderRadius: justifyActive === 'tab3' ? '8px' : '0px',color:justifyActive==='tab3'? 'black':'black',width:'90%' }}
             >
-              Requests
+              Certifications
             </MDBTabsLink>
           </MDBTabsItem>
         </MDBTabs>
@@ -56,7 +57,7 @@ export default function Carousel() {
       <MDBTabsContent>
         <MDBTabsPane open={justifyActive === 'tab1'}><ProfilePage /></MDBTabsPane>
         <MDBTabsPane open={justifyActive === 'tab2'}><Recommendations /></MDBTabsPane>
-        <MDBTabsPane open={justifyActive === 'tab3'}>Tab 3 content</MDBTabsPane>
+        <MDBTabsPane open={justifyActive === 'tab3'}><Certificate/></MDBTabsPane>
       </MDBTabsContent>
     </>
   );
