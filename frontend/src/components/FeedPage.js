@@ -33,6 +33,7 @@ export default function ProfilePage() {
     return <p><LoadingScreen /></p>;
   }
 
+  console.log('sfa');
   return (
     <>
       {queries.map((query, index) => (

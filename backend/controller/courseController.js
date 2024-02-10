@@ -21,7 +21,10 @@ async function getCoursesForUser(req, res){
     }
 }
 async function getAllCourses(req,res){
-    let {page,limit} = req.body
+    console.log(req);
+    let page = isNaN(parseInt(req.params.page)) ? 1 : parseInt(req.params.page);
+let limit = isNaN(parseInt(req.params.limit)) ? 10 : parseInt(req.params.limit);
+
     try{
         let result = {}
         const maxLimit = 10;
