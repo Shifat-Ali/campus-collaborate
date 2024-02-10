@@ -1,10 +1,10 @@
 const pool = require("../db/pool");
 
-const getUser = (req, res) => {
-    const id = req.body.id;
-    console.log(id);
-    const query = "SELECT * FROM backend.users WHERE id = $1";
-    const values = [id];
+const getUserId = (req, res) => {
+    const email = req.body.email;
+    // console.log(email);
+    const query = "SELECT * FROM backend.users WHERE email = $1";
+    const values = [email];
 
     pool.query(query, values, (error, result) => {
         if (error) {
@@ -17,5 +17,5 @@ const getUser = (req, res) => {
 };
 
 module.exports = {
-    getUser
+    getUserId
 };

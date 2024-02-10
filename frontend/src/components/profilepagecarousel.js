@@ -4,6 +4,7 @@ import Carousel from "./carouselprofile";
 
 const New = () => {
   const [userData, setUserData] = useState({ name: "Chandan Kolaparthi", course: "B.Tech", branch: "ECE", year: "3rd year", points: 35, clubs: ["Coding Club", "Automobile Club"], bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia, felis a vulputate eleifend, arcu nulla gravida lorem, sit amet consequat velit purus ut lorem. Curabitur a nisi vitae nisi pretium auctor. Fusce gravida non tellus sit amet volutpat. Integer.", tags: ['PHOTOSHOP', "FIGMA", "C++", "PYTHON"], connections: 375 })
+  console.log(userData);
   const [projects, setProjects] = useState([
     { name: "Big Project", detail: "Aliquam tempor fermentum viverra. Proin fermentum dolor ipsum, eu scelerisque elit maximus sit amet. Proin porttitor sit...", badges: ["SOFTWARE", "AI"] },
     { name: "Big Project", detail: "Aliquam tempor fermentum viverra. Proin fermentum dolor ipsum, eu scelerisque elit maximus sit amet. Proin porttitor sit...", badges: ["SOFTWARE", "AI"] },

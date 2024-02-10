@@ -5,9 +5,11 @@ import RightPart from '../components/RightPartFeed';
 import ProfilePage from '../components/projectCard';
 import CustomSeparator from '../components/breadcrumbproject';
 import CommentSection from '../components/Comment';
-function ProjectPage() {
-  const currentUser = "User1";
+import { useParams } from 'react-router';
 
+function ProjectPage() {
+  const { id } = useParams();
+  const currentUser = "User1";
   return (
     <div style={{ display: 'flex', background: '#FAFAFA', minHeight: '100vh' }}>
       <div>
@@ -15,11 +17,11 @@ function ProjectPage() {
       </div>
       <div style={{ flex: '1', margin: '20px', display: 'flex', flexDirection: 'column' }}>
         <div style={{ marginBottom: '20px' }}>
-          <CustomSeparator/>
+          <CustomSeparator />
         </div>
         <div style={{ background: 'white', borderRadius: '16px', padding: '20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <ProfilePage/>
-        <CommentSection/>
+          <ProfilePage />
+          <CommentSection />
         </div>
       </div>
       <div>

@@ -1,4 +1,4 @@
-const {faker} = require('@faker-js/faker');
+const { faker } = require('@faker-js/faker');
 
 const pool = require('../db/pool');
 
@@ -44,7 +44,7 @@ function generateImageOrURL() {
 
 // Function to insert fake project data into the database
 async function insertFakeProjects(numProjects) {
-    
+
     try {
         for (let i = 0; i < numProjects; i++) {
             const fakeProject = generateFakeProject();
@@ -66,9 +66,9 @@ async function insertFakeProjects(numProjects) {
         }
     } catch (error) {
         console.error('Error inserting fake projects:', error);
-    } 
+    }
 }
 insertFakeProjects(20);
 // Call the function with the desired number of fake projects to insert
- // Inserting 10 fake projects as an example
-module.exports = {insertFakeProjects}
+// Inserting 10 fake projects as an example
+module.exports = { insertFakeProjects }
