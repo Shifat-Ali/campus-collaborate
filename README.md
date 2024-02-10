@@ -1,6 +1,6 @@
 # Campus Collaborate
 
-Welcome to Campus Collaborate, a web and mobile app designed for students to collaborate, showcase their projects, and connect with like-minded peers within their campus community.
+Welcome to Campus Collaborate, a web app designed for students to collaborate, showcase their projects, and connect with like-minded peers within their campus community.
 
 ## Key Features
 
@@ -21,4 +21,3 @@ If you encounter any bugs or issues while using the platform, please report them
 
 Our design philosophy emphasizes simplicity, usability, and accessibility to ensure an enjoyable user experience for all students.
 
-We continuously gather feedback from users to identify areas for improvement and iterate on the design.
