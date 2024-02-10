@@ -2,12 +2,12 @@ import React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 
-const YourComponent = ({ img }) => {
+const YourComponent = ({ courseimg }) => {
   return (
     <Card>
       <CardMedia
         component="img"
-        src={img}
+        src={courseimg}
         sx={{
           width: "100%",
           height: "100%",

@@ -4,7 +4,7 @@ import PermanentDrawerLeft from '../components/Leftbar';
 import RightPart from '../components/RightPartFeed';
 
 function Profile() {
-  const currentUser = "ABC";
+  const currentUser = "ABCD";
   return (
     <div style={{ display: 'flex', background: '#FAFAFA', minHeight: '100vh' }}>
       <div>

@@ -13,7 +13,8 @@ const CommentCard = ({ userIcon, name, username, timestamp, comment }) => {
     <Card variant="outlined" style={{ marginBottom: '10px', position: 'relative' }}>
       <CardContent>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <AccountCircleIcon style={{ marginRight: '10px' }} />
+          
+          <img src={userIcon} alt="" style={{ width: '40px', height: '40px', marginRight: '10px', borderRadius: '50%' }} />
           <div>
             <Typography variant="subtitle1">{name}</Typography>
             <Typography variant="body2" color="textSecondary">@{username} • {timestamp}</Typography>
