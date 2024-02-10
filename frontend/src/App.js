@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import ExplorePage from './Pages/explore';
 import CreatePage from './Pages/create';
 import LandingPage from './Pages/landing';
@@ -8,6 +8,7 @@ import PostPage from './Pages/Postpage';
 import ProjectPage from './Pages/project';
 import RequestPage from './Pages/request';
 import Profile from './Pages/profile';
+import CourseRevMain from './Pages/coursereviewmain';
 import axios from "axios"
 
 
@@ -19,12 +20,17 @@ import axios from "axios"
 function App() {
   // utility();
   return (
-    // <Router>
-    //   <Routes>
-    //     `<Route path='/' exact Component={LandingPage} />
-    //   </Routes>
-    // </Router>
-    <Profile />
+    <Routes>
+      <Route path='/' element={<LandingPage />} />
+      <Route path='/create' element={<CreatePage />} />
+      <Route path='/explore' element={<ExplorePage />} />
+      <Route path='/feed' element={<FeedPage />} />
+      <Route path='/post' element={<PostPage />} />
+      <Route path='/project' element={<ProjectPage />} />
+      <Route path='/request' element={<RequestPage />} />
+      <Route path='/profile' element={<Profile />} />
+      <Route path='/courses' element={<CourseRevMain />} />
+    </Routes>
   )
 
 }

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -32,6 +33,8 @@ export default function RightPart() {
     picture: <AccountCircleIcon style={{ fontSize: '50px' }} />
   };
 
+  const navigate = useNavigate();
+
   return (
     <Box sx={{ display: 'flex', background: '#FAFAFA' }}>
       <CssBaseline />
@@ -53,7 +56,7 @@ export default function RightPart() {
         <div style={{ position: 'relative' }}>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80px' }}>
             <NotificationsIcon style={{ marginRight: '25px' }} />
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={() => navigate('/create')} >
               <EditIcon style={{ marginRight: '5px' }} /> Create Post
             </Button>
           </Box>
@@ -61,37 +64,37 @@ export default function RightPart() {
           <SearchBar />
 
           <div style={{ outline: '1px solid #ccc', borderRadius: '10px', padding: '10px', marginTop: '20px', marginLeft: '1px', marginRight: '20px', position: 'relative', background: 'white' }}>
-  <div style={{ display: 'flex', alignItems: 'center' }}>
-    {currentUser.picture}
-    <div style={{ marginLeft: '10px' }}>
-      <div>{currentUser.name} <ArrowForwardIcon style={{ fontSize: '15px' }} /></div>
-      <div>{currentUser.department} •{currentUser.branch}• {currentUser.year}</div>
-    </div>
-  </div>
-  <Button variant="contained" style={{ marginTop: '10px', textTransform: 'none', width: '100%', background: 'white', boxShadow: 'none', color: 'black', display: 'flex', justifyContent: 'space-between' }}>
-  <span style={{ textAlign: 'left', width: '100%', fontWeight: 'lighter' }}><AttachFileIcon />Social Links</span>
-  <KeyboardArrowRightIcon />
-</Button>
-<Button variant="contained" style={{ marginTop: '10px', textTransform: 'none', width: '100%', background: 'white', boxShadow: 'none', color: 'black', display: 'flex', justifyContent: 'space-between' }}>
-  <span style={{ textAlign: 'left', width: '100%', fontWeight: 'lighter' }}><LibraryBooksIcon />Add Resume</span>
-  <KeyboardArrowRightIcon />
-</Button>
-<Button variant="contained" style={{ marginTop: '10px', textTransform: 'none', width: '100%', background: 'white', boxShadow: 'none', color: 'black', display: 'flex', justifyContent: 'space-between' }}>
-  <span style={{ textAlign: 'left', width: '100%', fontWeight: 'lighter' }}><AddIcon />Add work/projects</span>
-  <KeyboardArrowRightIcon />
-</Button>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              {currentUser.picture}
+              <div style={{ marginLeft: '10px' }}>
+                <div>{currentUser.name} <ArrowForwardIcon style={{ fontSize: '15px' }} /></div>
+                <div>{currentUser.department} •{currentUser.branch}• {currentUser.year}</div>
+              </div>
+            </div>
+            <Button variant="contained" style={{ marginTop: '10px', textTransform: 'none', width: '100%', background: 'white', boxShadow: 'none', color: 'black', display: 'flex', justifyContent: 'space-between' }}>
+              <span style={{ textAlign: 'left', width: '100%', fontWeight: 'lighter' }}><AttachFileIcon />Social Links</span>
+              <KeyboardArrowRightIcon />
+            </Button>
+            <Button variant="contained" style={{ marginTop: '10px', textTransform: 'none', width: '100%', background: 'white', boxShadow: 'none', color: 'black', display: 'flex', justifyContent: 'space-between' }}>
+              <span style={{ textAlign: 'left', width: '100%', fontWeight: 'lighter' }}><LibraryBooksIcon />Add Resume</span>
+              <KeyboardArrowRightIcon />
+            </Button>
+            <Button variant="contained" style={{ marginTop: '10px', textTransform: 'none', width: '100%', background: 'white', boxShadow: 'none', color: 'black', display: 'flex', justifyContent: 'space-between' }}>
+              <span style={{ textAlign: 'left', width: '100%', fontWeight: 'lighter' }}><AddIcon />Add work/projects</span>
+              <KeyboardArrowRightIcon />
+            </Button>
 
-        
+
           </div>
           <div style={{ outline: '1px solid #ccc', borderRadius: '10px', padding: '10px', marginTop: '20px', marginLeft: '1px', marginRight: '20px', position: 'relative', background: 'white' }}>
 
             Notifications <ArrowForwardIcon style={{ fontSize: '15px' }} />
             <div style={{ width: '100%', borderTop: '1px solid #ccc' }}></div> {/* Vertical line */}
-            
+
             {/* Display notifications */}
             {notifications.map((notification, index) => (
               <div key={index} style={{ marginTop: '10px' }}>
-                {notification.icon} <span style={{ fontWeight: 'bold' }}>{notification.user}</span>: {notification.content} 
+                {notification.icon} <span style={{ fontWeight: 'bold' }}>{notification.user}</span>: {notification.content}
                 <a href={notification.link} style={{ marginLeft: '5px' }}>View</a>
                 <div style={{ width: '100%', borderTop: '1px solid #ccc' }}></div> {/* Vertical line */}
               </div>

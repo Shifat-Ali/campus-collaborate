@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -17,21 +18,21 @@ const drawerWidth = 300;
 export default function RightPart() {
   // Hardcoded opportunity data
   const opportunity = [
-    { 
-      title: 'Event 1', 
-      subtitle: 'XYZ Club', 
-      description: 'very good opportunity', 
+    {
+      title: 'Event 1',
+      subtitle: 'XYZ Club',
+      description: 'very good opportunity',
       icon: <LibraryBooksIcon />,
       expiryDate: '2024-02-28'
     },
-    { 
-      title: 'Event 2', 
-      subtitle: 'ABC Club', 
-      description: 'very good opportunity', 
+    {
+      title: 'Event 2',
+      subtitle: 'ABC Club',
+      description: 'very good opportunity',
       icon: <LibraryBooksIcon />,
       expiryDate: '2024-03-15'
     },
-    
+
   ];
 
   // Function to calculate remaining days
@@ -41,6 +42,8 @@ export default function RightPart() {
     const remainingDays = endDate.diff(currentDate, 'days');
     return remainingDays;
   };
+
+  const navigate = useNavigate();
 
   return (
     <Box sx={{ display: 'flex', background: '#FAFAFA' }}>
@@ -63,7 +66,7 @@ export default function RightPart() {
         <div style={{ position: 'relative' }}>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80px' }}>
             <NotificationsIcon style={{ marginRight: '25px' }} />
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={() => { navigate('/create') }}>
               <EditIcon style={{ marginRight: '5px' }} /> Create Post
             </Button>
           </Box>
@@ -81,7 +84,9 @@ export default function RightPart() {
             </div>
           </div>
           <div style={{ outline: '1px solid #ccc', borderRadius: '10px', padding: '10px', marginTop: '20px', marginLeft: '1px', marginRight: '20px', position: 'relative', background: 'white' }}>
-            Explore Opportunities <ArrowForwardIcon style={{ fontSize: '15px' }} />
+            <div onClick={() => { navigate('/opportunities') }}>
+              Explore Opportunities <ArrowForwardIcon style={{ fontSize: '15px' }} />
+            </div>
             <div style={{ width: '100%', borderTop: '1px solid #ccc', marginTop: '10px' }}></div> {/* Vertical line */}
             {/* Display opportunities */}
             {opportunity.map((item, index) => (
@@ -96,11 +101,11 @@ export default function RightPart() {
                 </div>
                 <div>{item.description}</div>
                 <div style={{ display: 'flex', alignItems: 'center', marginTop: '5px' }}>
-                  <div style={{ background: '#0261FB14', color: 'black', padding: '10px 18px', borderRadius: '8px', marginRight: '1px', fontSize: '0.8rem', width: '100%',height:'50px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ background: '#0261FB14', color: 'black', padding: '10px 18px', borderRadius: '8px', marginRight: '1px', fontSize: '0.8rem', width: '100%', height: '50px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
-                      Expiring in <div style={{fontSize:'18px'}}> {calculateRemainingDays(item.expiryDate)} days</div>
+                      Expiring in <div style={{ fontSize: '18px' }}> {calculateRemainingDays(item.expiryDate)} days</div>
                     </div>
-                    <Button variant="contained" color="primary" style={{ marginLeft: 'auto', padding: '2px 8px', fontSize: '0.8rem', background: 'white', color: 'black' ,height:'35px', boxShadow: 'none'}}>Apply</Button>
+                    <Button variant="contained" color="primary" style={{ marginLeft: 'auto', padding: '2px 8px', fontSize: '0.8rem', background: 'white', color: 'black', height: '35px', boxShadow: 'none' }}>Apply</Button>
                   </div>
                 </div>
               </div>

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -16,9 +17,11 @@ export default function PermanentDrawerLeft() {
   // Hardcoded username
   const username = 'User1';
 
+  const navigate = useNavigate();
+
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline /> 
+      <CssBaseline />
       <Drawer
         sx={{
           width: drawerWidth,
@@ -26,18 +29,18 @@ export default function PermanentDrawerLeft() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            background:'#eeeeee',
-            borderColor:'#eeeeee'
+            background: '#eeeeee',
+            borderColor: '#eeeeee'
           },
         }}
         variant="permanent"
         anchor="left"
       >
-     
+
 
         {/* Original button section */}
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80px' ,marginTop:'100px'}}>
-          <Button variant="contained" color="primary">
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80px', marginTop: '100px' }}>
+          <Button variant="contained" color="primary" onClick={() => { navigate('/create') }}>
             <EditIcon style={{ marginRight: '5px' }} /> Create Post
           </Button>
         </Box>
@@ -45,23 +48,23 @@ export default function PermanentDrawerLeft() {
         {/* Three buttons with no background, aligned at the center horizontally */}
 
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', paddingLeft: '40px' }}>
-        <Button style={{ margin: '8px', textTransform: 'none', color: 'black' }}>
-             Feed
+          <Button style={{ margin: '8px', textTransform: 'none', color: 'black' }} onClick={() => { navigate('/feed') }}>
+            Feed
           </Button>
-          <Button style={{ margin: '8px', textTransform: 'none', color: 'black' }}>
-             Explore
+          <Button style={{ margin: '8px', textTransform: 'none', color: 'black' }} onClick={() => { navigate('/explore') }}>
+            Explore
           </Button>
-          <Button style={{ margin: '8px', textTransform: 'none', color: 'black' }}>
-             Course Review
+          <Button style={{ margin: '8px', textTransform: 'none', color: 'black' }} onClick={() => { navigate('/courses') }}>
+            Course Review
           </Button>
-          <Button style={{ margin: '8px', textTransform: 'none', color: 'black' }}>
-             Opportunities
+          <Button style={{ margin: '8px', textTransform: 'none', color: 'black' }} onClick={() => { navigate('/opportunities') }}>
+            Opportunities
           </Button>
         </Box>
 
         {/* Additional button at the extreme bottom */}
-        <Box sx={{ textAlign: 'center',marginTop:'auto' }}>
-          <Button style={{ margin: '8px', textTransform: 'none', color: 'black' }}>
+        <Box sx={{ textAlign: 'center', marginTop: 'auto' }}>
+          <Button style={{ margin: '8px', textTransform: 'none', color: 'black' }} onClick={() => { navigate('/profile') }}>
             <PersonOutlineIcon style={{ marginRight: '5px' }} /> My Profile
           </Button>
         </Box>
