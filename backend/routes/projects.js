@@ -2,14 +2,14 @@ const router = require('express').Router()
 const express = require('express')
 const auth = require('../middlewares/auth')
 // const auth = require('../../middlewares/auth')
-const { getAllProject, getCollaboratorsByProjectId,getProjectById } = require('../controller/projectControllernew')
-const {getFeedbackByProjectId} = require('../db/commentController')
-const {insertProject} =require('../controller/userProjectController')
-router.get ('/',getAllProject);
-router.get('/projectid',getProjectById )
+const { getAllProject, getCollaboratorsByProjectId, getProjectById } = require('../controller/projectControllernew')
+const { getFeedbackByProjectId } = require('../db/commentController')
+const { insertProject } = require('../controller/userProjectController')
+router.get('/', getAllProject);
+router.get('/:id', getProjectById)
 // router.post('/:id/vote',voteProjectById)
 
-router.get('/collaborators',getCollaboratorsByProjectId)
+router.get('/collaborators', getCollaboratorsByProjectId)
 // POST route to fetch feedback by project ID with pagination parameters in the URL path
 router.post('/:id/feedback/:page&:limit', async (req, res) => {
     try {

@@ -6,6 +6,7 @@ import ProfilePage from '../components/projectCard';
 import CustomSeparator from '../components/breadcrumbproject';
 import CommentSection from '../components/Comment';
 import { useParams } from 'react-router';
+import ProjectComment from './projectcomment';
 
 function ProjectPage() {
   const { id } = useParams();
@@ -20,8 +21,8 @@ function ProjectPage() {
           <CustomSeparator />
         </div>
         <div style={{ background: 'white', borderRadius: '16px', padding: '20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <ProfilePage />
-          <CommentSection />
+          <ProfilePage id={id} />
+          <ProjectComment id={id} />
         </div>
       </div>
       <div>

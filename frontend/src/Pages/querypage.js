@@ -7,6 +7,7 @@ import CustomSeparator from '../components/breadcrumbproject';
 import CommentSection from '../components/Comment';
 import { useParams } from 'react-router';
 import Query from '../components/querycards';
+import QueryComment from './querycomment';
 
 function QueryPage() {
     const { id } = useParams();
@@ -21,8 +22,8 @@ function QueryPage() {
                     <CustomSeparator />
                 </div>
                 <div style={{ background: 'white', borderRadius: '16px', padding: '20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                    <Query />
-                    <CommentSection />
+                    <Query id={id} />
+                    <QueryComment id={id} />
                 </div>
             </div>
             <div>

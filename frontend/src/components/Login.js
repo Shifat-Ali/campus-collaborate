@@ -3,14 +3,14 @@ import MicrosoftLogin from "react-microsoft-login";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { AccountContext } from "../context/AccountProvider.jsx";
-const utility1 = async (userData,setUser) => {
+const utility1 = async (userData) => {
   const response = await axios({
     method: "post",
     url: "http://localhost:2015/userId",
     headers: { "Content-Type": "application/json" },
     data: JSON.stringify(userData),
   });
-  await setUser(response.data[0].id);
+  console.log(response.data[0].id);
 };
 
 const utility = async (userData) => {
@@ -24,7 +24,7 @@ const utility = async (userData) => {
 };
 
 const Login = () => {
-  const {user,setUser}=useContext(AccountContext);
+  // const {user,setUser}=useContext(AccountContext);
   const [error, setError] = useState(null);
   const authHandler = async (error, authData) => {
     if (!error) {
@@ -39,7 +39,7 @@ const Login = () => {
       };
       const userData2 = { "email": userData.email };
       utility(userData);
-      utility1(userData2,setUser);
+      utility1(userData2);
     } else {
       console.log("Error while authentication", error);
       setError(error);

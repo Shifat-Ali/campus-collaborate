@@ -62,7 +62,7 @@ async function getCommentCountByProjectId(project_id) {
 async function getLimitedCommentReplyByCommentId(comment_id) {
     try {
         sql = `
-        SELECT t1.reply_id as id, comment_id, body, created_at, user_id, username, profile_photo
+        SELECT t1.reply_id as id, comment_id, body, created_at, user_id, username, profile_photo, email
         FROM backend.comment_reply as t1
         INNER JOIN backend.comments as t2
         ON t1.reply_id = t2.id
@@ -88,7 +88,7 @@ async function getLimitedCommentReplyByCommentId(comment_id) {
 async function getAllCommentReplyByCommentId(comment_id) {
     try {
         sql = `
-        SELECT comment_id, reply_id, body, created_at, user_id, username, profile_photo
+        SELECT comment_id, reply_id, body, created_at, user_id, username, profile_photo, email
         FROM backend.comment_reply as t1
         INNER JOIN backend.comments as t2
         ON t1.reply_id = t2.id
@@ -113,7 +113,7 @@ async function getAllCommentReplyByCommentId(comment_id) {
 async function getAnswersByQueryId(query_id, offset, limit) {
     try {
         sql = `
-            SELECT t1.comment_id as id, query_id, body, created_at, user_id, username, profile_photo
+            SELECT t1.comment_id as id, query_id, body, created_at, user_id, username, profile_photo, email
             FROM backend.answer AS t1
             INNER JOIN backend.comments AS t2
             ON t1.comment_id = t2.id
@@ -145,7 +145,7 @@ async function getAnswersByQueryId(query_id, offset, limit) {
 async function getFeedbackByProjectId(project_id, offset, limit) {
     try {
         sql = `
-            SELECT t1.comment_id as id, project_id, body, created_at, user_id, username, profile_photo
+            SELECT t1.comment_id as id, project_id, body, created_at, user_id, username, profile_photo, email
             FROM backend.feedback AS t1
             INNER JOIN backend.comments AS t2
             ON t1.comment_id = t2.id

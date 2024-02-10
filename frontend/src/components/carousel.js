@@ -7,6 +7,7 @@ import {
   MDBTabsPane
 } from 'mdb-react-ui-kit';
 import ProfilePage from './FeedPage';
+import ProjectFeedPage from './ProjectFeedPage';
 
 export default function Carousel() {
   const [justifyActive, setJustifyActive] = useState('tab1');
@@ -54,7 +55,7 @@ export default function Carousel() {
       </div>
       <MDBTabsContent>
         <MDBTabsPane open={justifyActive === 'tab1'}><ProfilePage /></MDBTabsPane>
-        <MDBTabsPane open={justifyActive === 'tab2'}><ProfilePage /></MDBTabsPane>
+        <MDBTabsPane open={justifyActive === 'tab2'}><ProjectFeedPage /></MDBTabsPane>
         <MDBTabsPane open={justifyActive === 'tab3'}>Tab 3 content</MDBTabsPane>
       </MDBTabsContent>
     </>

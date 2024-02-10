@@ -38,16 +38,19 @@ const loremText = lorem.generateParagraphs(1);
 
 
 export default function PostCard2(props) {
-    // const { queryData } = useParams();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     // const [expanded, setExpanded] = React.useState(false);
     // console.log('props', props.data);
-    // console.log('sfsdfsfs', props.data);
+    const date = new Date(props.data.created_at);
     let tags = props.data.tags;
-    let query = {
+    let project = {
         "id": props.data.id,
-        "title": props.data.title,
-        "body": props.data.body,
+        "title": props.data.project_name,
+        "subtitle": props.data.tagline,
+        "url": props.data.url,
+        "body": props.data.description,
+        "date": date.toLocaleDateString(),
+        "time": date.toLocaleTimeString(),
         "user_id": props.data.user_id,
         "profile_photo": props.data.profile_photo,
 
@@ -58,8 +61,8 @@ export default function PostCard2(props) {
 
     const handleExpandClick = () => {
         // setExpanded(!expanded);
-        // console.log('exoanded click');
-        // navigate(`/queries/${query.id}`);
+        console.log('exoanded click');
+        navigate(`/project/${project.id}`);
     };
 
     function VariantButtonGroup() {
@@ -87,7 +90,7 @@ export default function PostCard2(props) {
 
     const handleImageClick = () => {
         console.log('Image clicked');
-        // navigate('/profile');
+        navigate('/profile');
         // Add your onClick logic here
     };
 
@@ -176,7 +179,7 @@ export default function PostCard2(props) {
         const handleLikeClick = () => {
             // setLikes(likes + 1);
             console.log('comment clicked');
-            // navigate(`/queries/${query.id}`);
+            navigate(`/project/${project.id}`);
         };
 
 
@@ -196,7 +199,7 @@ export default function PostCard2(props) {
             <CardHeader
                 avatar={
                     <img
-                        src={query.profile_photo || yourImage}
+                        src={project.profile_photo || yourImage}
                         style={{ height: "60px", borderRadius: "30px", cursor: 'pointer' }}
                         alt="Your Image"
                         onClick={handleImageClick}
@@ -207,23 +210,23 @@ export default function PostCard2(props) {
                 //     <MoreVertIcon />
                 //   </IconButton>
                 // }
-                title={query.title}
-            // subheader={query.date + ' ' + query.time}
+                title={project.title}
+                subheader={project.date + ' ' + project.time}
             />
 
             <div style={containerStyle}>
                 <CardContent onClick={handleExpandClick}>
                     <Typography variant="body2" color="text.primary" >
                         {/* {loremText} */}
-                        {query.body}
+                        {project.body}
                     </Typography>
-                    {/* <Link
-            href="https://www.google.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            https://www.google.com
-          </Link> */}
+                    <Link
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {project.url}
+                    </Link>
 
                 </CardContent>
             </div>

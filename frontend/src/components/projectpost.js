@@ -36,12 +36,24 @@ const loremText = lorem.generateParagraphs(1);
 
 
 
-export default function PostCard1() {
-  const [expanded, setExpanded] = React.useState(false);
+export default function PostCard1(props) {
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const project = {
+    "name": props.data.project.project_name,
+    "tagline": props.data.project.tagline,
+    "body": props.data.project.description,
+    "url": props.data.project.url,
+    "username": props.data.project.username,
+    "profile_photo": props.data.project.profile_photo,
+  }
+  // let numOfLikes = props.data.project.votes;
+  let collaborators = props.data.collaborators;
+  let tags = props.data.tags;
+  // const [expanded, setExpanded] = React.useState(false);
+
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded);
+  // };
 
   function VariantButtonGroup() {
     return (
@@ -50,25 +62,25 @@ export default function PostCard1() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          
+
           '& > *': {
             m: 1,
           },
         }}
       >
-        <ButtonGroup  style={{ width: '100%' }} color="secondary" variant="outlined" aria-label="Basic button group">
-        <Button style={{ flex:1 ,borderColor: 'black' ,color:'black'}}> <LikesButton /></Button>
-        <Button style={{ flex:1 ,borderColor: 'black' ,color:'black'}}> <CommentButton /></Button>
-          <Button style={{ flex:1 ,borderColor: 'black' ,color:'black'}}><Refresh/> </Button>
-         
-          
-    
+        <ButtonGroup style={{ width: '100%' }} color="secondary" variant="outlined" aria-label="Basic button group">
+          <Button style={{ flex: 1, borderColor: 'black', color: 'black' }}> <LikesButton /></Button>
+          <Button style={{ flex: 1, borderColor: 'black', color: 'black' }}> <CommentButton /></Button>
+          <Button style={{ flex: 1, borderColor: 'black', color: 'black' }}><Refresh /> </Button>
+
+
+
         </ButtonGroup>
-     
+
       </Box>
     );
   }
-  
+
   const handleImageClick = () => {
     console.log('Image clicked');
     // Add your onClick logic here
@@ -79,13 +91,13 @@ export default function PostCard1() {
       // Add your refresh logic here
       console.log('Refresh button clicked');
     };
-  
+
     return (
       <div>
         <IconButton onClick={handleRefreshClick} color="primary">
           <CachedIcon color="action" />
         </IconButton>
-        <span style={{ fontSize: 14  }}>Repost</span>
+        <span style={{ fontSize: 14 }}>Repost</span>
       </div>
     );
   };
@@ -103,14 +115,14 @@ export default function PostCard1() {
       fontSize: '14px',
       color: "black",
     };
-  
+
     return <div style={tagStyle}>{text}</div>;
   };
 
 
-//   const Comments = () => {
-//     return <Button startIcon={<ChatIcon color="action" />}></Button>;
-//   };
+  //   const Comments = () => {
+  //     return <Button startIcon={<ChatIcon color="action" />}></Button>;
+  //   };
 
   const containerStyle = {
     display: "flex",
@@ -129,13 +141,17 @@ export default function PostCard1() {
 
   const LikesButton = () => {
     const [likes, setLikes] = useState(0);
-
     const handleLikeClick = () => {
-      setLikes(likes + 1);
-     
+      // if (likes > numOfLikes) {
+      //   setLikes(likes - 1);
+      // }
+      // else if (likes === numOfLikes) {
+      //   setLikes(likes + 1);
+      // }
+      // console.log('clikced likes');
     };
 
-    
+
 
     return (
       <div>
@@ -144,8 +160,8 @@ export default function PostCard1() {
           startIcon={<ThumbUpIcon color="action" />}
           onClick={handleLikeClick}
         ></Button> */}
-          <ThumbUpIcon color="action" onClick={handleLikeClick} />
-          
+        <ThumbUpIcon color="action" onClick={handleLikeClick} />
+
         <span style={{ marginLeft: "5px", fontSize: 20 }}>{likes}</span>
       </div>
     );
@@ -158,13 +174,13 @@ export default function PostCard1() {
       setLikes(likes + 1);
     };
 
-    
+
 
     return (
       <div>
-          
-          <ChatIcon color="action" onClick={handleLikeClick} />
-          
+
+        <ChatIcon color="action" onClick={handleLikeClick} />
+
         <span style={{ marginLeft: "5px", fontSize: 20 }}>{likes}</span>
       </div>
     );
@@ -172,52 +188,62 @@ export default function PostCard1() {
 
   return (
     <div>
-      <ProjectCard/>
-    <Card sx={{ maxWidth: "none",border: "none" } } elevation={0} >
-      <CardHeader
-        avatar={
-          <img
-            src={yourImage}
-            style={{ height: "60px", borderRadius: "30px",cursor: 'pointer' }}
-            alt="Your Image"
-            onClick={handleImageClick}
-          />
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
-      />
+      <ProjectCard />
+      <Card sx={{ maxWidth: "none", border: "none" }} elevation={0} >
+        <CardHeader
+          avatar={
+            // {
+            //   comment.userIcon == null ? (
+            //     <AccountCircleIcon style={{ marginRight: '10px' }} />
+            //   ) : (
+            //     <img src={comment.userIcon} alt="" style={{ width: '40px', height: '40px', marginRight: '10px', borderRadius: '50%' }} />
+            //   )
+            // }
+            <img
+              src={project.profile_photo}
+              style={{ height: "60px", borderRadius: "30px", cursor: 'pointer' }}
+              alt="Your Image"
+              onClick={handleImageClick}
+            />
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title={project.name}
+          subheader={project.tagline}
+        />
 
-      <div style={containerStyle}>
-        <CardContent>
-          <Typography variant="body2" color="text.primary" >
-            {loremText}
-          </Typography>
-          <Link
-            href="https://www.google.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            https://www.google.com
-          </Link>
-         
-        </CardContent>
-      </div>
-      <div style={{flex:1,marginLeft:"90px"}}>
-      <Tag text={"SOFTWARE"}/>
-      <Tag text={"A.I."}/>
-      <Tag text={"REACT"}/>
-      </div>
-     
-      <div style={{  marginLeft: "75px", marginRight: "75px"}}>
-      <VariantButtonGroup></VariantButtonGroup>
-      </div>
-      
-    </Card>
+        <div style={containerStyle}>
+          <CardContent>
+            <Typography variant="body2" color="text.primary" >
+              {loremText}
+            </Typography>
+            <Link
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {project.url}
+            </Link>
+
+          </CardContent>
+        </div>
+        <div style={{ flex: 1, marginLeft: "90px" }}>
+          {tags.map((tag, index) => (
+            <Tag key={index} text={tag} />
+          ))}
+          {/* <Tag text={"SOFTWARE"} />
+        <Tag text={"A.I."} />
+        <Tag text={"REACT"} /> */}
+        </div>
+
+        <div style={{ marginLeft: "75px", marginRight: "75px", marginBottom: "30px" }}>
+          {/* <VariantButtonGroup></VariantButtonGroup> */}
+        </div>
+
+      </Card>
     </div>
   );
 }
