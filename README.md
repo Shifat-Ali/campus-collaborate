@@ -1,89 +1,52 @@
-# Campus Collaborate
+<div class="container">
+  <h1>Campus Collaborate</h1>
+  <p>Welcome to Campus Collaborate, a web and mobile app designed for students to collaborate, showcase their projects, and connect with like-minded peers within their campus community.</p>
+  <h2>Key Features</h2>
+  <ul>
+    <li>Project Showcase</li>
+    <li>User Profiles</li>
+    <li>Rating and Feedback System</li>
+    <li>Ask-for-Help Functionality</li>
+    <li>Course Review Page</li>
+    <li>Anti-Spam Engine (Bonus)</li>
+  </ul>
+  <h2>Development and Bug Reporting</h2>
+  <p>Our primary focus is on delivering a user-friendly and feature-rich platform that meets the needs of students within a campus environment.</p>
+  <p>If you encounter any bugs or issues while using the platform, please report them to our GitHub repository. We welcome contributions from the community to help improve the platform's functionality and reliability.</p>
+  <h2>User Experience and Design</h2>
+  <p>Our design philosophy emphasizes simplicity, usability, and accessibility to ensure an enjoyable user experience for all students.</p>
+  <p>We continuously gather feedback from users to identify areas for improvement and iterate on the design.</p>
+</div>
 
-Campus Collaborate is a platform designed to facilitate collaboration on projects within a university campus environment. This repository provides the source code for the Campus Collaborate application.
 
-## Features
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-- **Project Creation**: Users can create new projects, specifying details such as project name, description, and required skills.
-- **Project Discovery**: Users can browse and search for projects based on various criteria such as project name, tags, or required skills.
-- **Team Formation**: Once a project is created, other users can express interest in joining the project. Project creators can then form teams by selecting members from the interested users list.
-- **Messaging**: Team members can communicate with each other through an integrated messaging system within the platform.
-- **Resource Sharing**: Users can share resources related to the project, such as documents, links, or images.
-- **Event Management**: The platform allows for the scheduling and management of project-related events, such as meetings or deadlines.
+h1 {
+  color: #333;
+}
 
-## Getting Started
+h2 {
+  color: #555;
+  margin-top: 20px;
+}
 
-To get started with Campus Collaborate, follow these steps:
+p {
+  color: #777;
+  line-height: 1.6;
+}
 
-1. **Clone the Repository**: Clone this repository to your local machine using `git clone`.
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
 
-2. **Install Dependencies**: Navigate to the project directory and install dependencies using your preferred package manager (`npm install` or `yarn install`).
-
-3. **Set Up Environment Variables**: Set up any necessary environment variables required for the application to run. Refer to the `.env.example` file for a list of required environment variables.
-
-4. **Run the Application**: Start the development server using `npm start` or `yarn start`.
-
-5. **Access the Application**: Once the server is running, access the application by navigating to `http://localhost:3000` in your web browser.
-
-## Contributing
-
-We welcome contributions from the community! If you'd like to contribute to Campus Collaborate, please follow these guidelines:
-
-- Fork the repository and create a new branch for your feature or bug fix.
-- Make your changes and ensure that the code passes any existing tests.
-- Test your changes locally to ensure they work as expected.
-- Submit a pull request with a clear description of your changes and the problem they solve.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-If you have any questions or suggestions regarding Campus Collaborate, feel free to contact us at [email@example.com](mailto:email@example.com).
-
-Thank you for using Campus Collaborate! We hope it helps foster collaboration and innovation within your university community.
-
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-  }
-
-  h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
-  }
-
-  h2 {
-    font-size: 24px;
-    margin-bottom: 16px;
-    margin-top: 20px;
-  }
-
-  ul {
-    list-style-type: disc;
-    margin-left: 20px;
-  }
-
-  p {
-    margin-bottom: 16px;
-  }
-
-  code {
-    background-color: #f4f4f4;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-family: Consolas, monospace;
-  }
-
-  pre {
-    background-color: #f4f4f4;
-    padding: 12px;
-    overflow-x: auto;
-    border-radius: 4px;
-  }
-</style>
+li {
+  color: #777;
+}
