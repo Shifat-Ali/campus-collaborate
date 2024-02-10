@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Chip, Menu, MenuItem, TextField } from "@mui/material";
+import axios from "axios";
 
 const Tags = () => {
   const [selectedTags, setSelectedTags] = useState([]);
-  const [availableTags, setAvailableTags] = useState([
-    "Tag1",
-    "Tag2",
-    "Tag3",
-    "Tag4",
-    "Tag5",
-    "Tag6",
-    "Tag7",
-    "Tag8",
-    "Tag9",
-    "Tag10",
-    "Tag11",
-  ]);
+  const [availableTags, setAvailableTags] = useState([]);
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const response = await axios.get("http://localhost:2015/tags");
+        const sortedTags = response.data.sort(); // Sort the tags synchronously
+        setAvailableTags(sortedTags);
+      } catch (error) {
+        console.error("Error fetching tags:", error);
+      }
+    };
+    fetchTags();
+  }, []);
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
