@@ -150,11 +150,11 @@ const MyProfile = () => {
                 </div>
               </div>
               <div className="d-flex flex-column my-2 me-3 ms-auto">
-                <p onClick={() => openModal("followers")}>
-                  Followers {userData.followers.length}
+                <p onClick={() => openModal("followers")} className="border border-2 rounded p-1 bg-primary text-white" style={{fontSize:'15px'}}>
+                  {userData.followers.length} Followers
                 </p>
-                <p onClick={() => openModal("following")}>
-                  Following {userData.following.length}
+                <p onClick={() => openModal("following")} className="border border-2 rounded p-1 text-white bg-primary" style={{fontSize:'15px'}}>
+                  {userData.following.length} Following
                 </p>
               </div>
             </div>
