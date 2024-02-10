@@ -49,7 +49,7 @@ const Recommendations = () => {
   };
 
   return (
-    <div className="col-md-8  w-100%" style={{ width: '1056px' }}>
+    <div>
       <div className="p-4">
         {recomm.map((recom, index) => (
           <div

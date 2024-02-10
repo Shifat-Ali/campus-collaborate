@@ -14,7 +14,9 @@ import WorkOpp from './Pages/WorkPage';
 import PageNotFound from './Pages/error';
 import IndividualCourse from './Pages/individualcourse';
 import MyProfilePage from './Pages/myprofile';
-
+import Features from './Pages/features';
+import Newthings from './Pages/whatsnew';
+import About from './Pages/about';
 
 // const utility=async ()=>{
 //   const response =await axios.get("http://localhost:2015/users?page=1&limit=10");
@@ -49,6 +51,10 @@ function App() {
         <Route path=':courseId' element={<IndividualCourse />} />
       </Route>
       <Route path='/opportunities' element={<WorkOpp />} />
+      
+      <Route path='/features' element={<Features/>} />
+      <Route path='/whats-new' element={<Newthings/>} />
+      <Route path='/about' element={<About/>} />
       <Route path='*' element={<PageNotFound />} />
     </Routes>
   )
